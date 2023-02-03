@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>products</h1>
+<h1>Products</h1>
 <div class="text-end">
         <a class="btn btn-success" href="{{route('admin.products.create')}}">Crea nuovo progetto</a>
 </div>
@@ -26,16 +26,16 @@
         <tbody>
         @foreach($products as $product)
                 <tr>
-                    <th scope="row">{{$project->id}}</th>
-                    <td><a href="{{route('admin.products.show', $project->slug)}}" title="View Project">{{$project->title}}</a></td>
-                    <td>{{Str::limit($project->content,100)}}</td>
-                    <td>{{$project->category ? $project->category->name : 'Senza categoria'}}</td>
-                    <td>{{$project->tags ? $project->tags : 0}}</td>
-                    <td><a class="link-secondary" href="{{route('admin.products.edit', $project->slug)}}" title="Edit Project"><i class="fa-solid fa-pen"></i></a></td>
-                    <td> <form action="{{route('admin.products.destroy', $project->slug)}}" method="POST">
+                    <th scope="row">{{$product->id}}</th>
+                    <td><a href="{{route('admin.products.show', $product->slug)}}" title="View Product">{{$product->title}}</a></td>
+                    <td>{{Str::limit($product->content,100)}}</td>
+                    <td>{{$product->category ? $product->category->name : 'Senza categoria'}}</td>
+                    <td>{{$product->tags ? $product->tags : 0}}</td>
+                    <td><a class="link-secondary" href="{{route('admin.products.edit', $product->slug)}}" title="Edit Product"><i class="fa-solid fa-pen"></i></a></td>
+                    <td> <form action="{{route('admin.products.destroy', $product->slug)}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="delete-button btn btn-danger ms-3" data-item-title="{{$project->title}}"><i class="fa-solid fa-trash-can"></i></button>
+                        <button type="submit" class="delete-button btn btn-danger ms-3" data-item-title="{{$product->title}}"><i class="fa-solid fa-trash-can"></i></button>
                      </form>
                     </td>
                 </tr>

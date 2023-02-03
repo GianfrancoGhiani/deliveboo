@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 
 class UserSeeder extends Seeder
@@ -17,6 +18,11 @@ class UserSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+
+        DB::statement("SET foreign_key_checks = 0;");
+        User::truncate();
+
+
 
         for ($i = 0; $i < 8; $i++) {
             $newuser = new User();
@@ -32,5 +38,8 @@ class UserSeeder extends Seeder
         $newuser->password = bcrypt('carlo');
         $newuser->role = 'admin';
         $newuser->save();
+
+
+        DB::statement("SET foreign_key_checks = 1;");
     }
 }
