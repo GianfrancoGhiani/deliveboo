@@ -5,6 +5,7 @@ return [
         "id" => 656329,
         "title" => "Pizza bites with pumpkin",
         "image" => "https://spoonacular.com/recipeImages/656329-312x231.jpg",
+        "restaurant_id" => 1,
         "imageType" => "jpg",
         "ingredients" => "pumpkin, olive oil, feta cheese, mozzarella, eggs, dried oregano, parsley, garlic"
     ],

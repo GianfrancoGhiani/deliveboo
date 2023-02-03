@@ -29,7 +29,7 @@ class RestaurantSeeder extends Seeder
             $newrestaurant->opening_time = $faker->time();
             $newrestaurant->closing_time = $faker->time();
             $newrestaurant->piva = $faker->ein();
-            $newrestaurant->type_id = $i + 1;
+            //$newrestaurant->type_id = $i + 1;
             $newrestaurant->user_id = $i + 1;
             $newrestaurant->save();
         }

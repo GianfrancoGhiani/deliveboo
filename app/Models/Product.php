@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Restaurant;
 
-class Dish extends Model
+class Product extends Model
 {
     use HasFactory;
 
