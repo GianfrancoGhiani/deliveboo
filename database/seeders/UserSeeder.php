@@ -24,20 +24,21 @@ class UserSeeder extends Seeder
 
 
 
-        for ($i = 0; $i < 8; $i++) {
+        for ($i = 0; $i < 9; $i++) {
             $newuser = new User();
             $newuser->name = $faker->firstName();
             $newuser->email = $faker->email();
             $newuser->password = bcrypt('carlo');
-            $newuser->role = 'owner';
+            // $newuser->role = 'owner';
             $newuser->save();
         }
-        $newuser = new User();
-        $newuser->name = $faker->firstName();
-        $newuser->email = 'admin@admin.com';
-        $newuser->password = bcrypt('carlo');
-        $newuser->role = 'admin';
-        $newuser->save();
+
+        // $newuser = new User();
+        // $newuser->name = $faker->firstName();
+        // $newuser->email = 'admin@admin.com';
+        // $newuser->password = bcrypt('carlo');
+        // $newuser->role = 'admin';
+        // $newuser->save();
 
 
         DB::statement("SET foreign_key_checks = 1;");

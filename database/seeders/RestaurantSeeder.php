@@ -23,7 +23,7 @@ class RestaurantSeeder extends Seeder
         DB::statement("SET foreign_key_checks = 0;");
         Restaurant::truncate();
         // dd($faker->ein());
-        for ($i = 0; $i < 8; $i++) {
+        for ($i = 0; $i < 9; $i++) {
 
             $newrestaurant = new Restaurant();
             $newrestaurant->name = $faker->company();
