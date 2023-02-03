@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 // use Faker\Provider\en_US\Company;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class RestaurantSeeder extends Seeder
@@ -18,6 +19,9 @@ class RestaurantSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+
+        DB::statement("SET foreign_key_checks = 0;");
+        Restaurant::truncate();
         // dd($faker->ein());
         for ($i = 0; $i < 8; $i++) {
 
@@ -33,5 +37,6 @@ class RestaurantSeeder extends Seeder
             $newrestaurant->user_id = $i + 1;
             $newrestaurant->save();
         }
+        DB::statement("SET foreign_key_checks = 1;");
     }
 }
