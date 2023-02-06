@@ -13,7 +13,7 @@ class StoreTypeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +21,20 @@ class StoreTypeRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+   public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'description' => 'required', 
+           
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'il nome è obbligatorio',
+            'description.required' => 'Il campo è obbligatorio',
+           
         ];
     }
 }
