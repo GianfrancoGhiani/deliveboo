@@ -93,7 +93,7 @@ class ProductController extends Controller
         $product->discount = $request->discount;
         $product->restaurant_id = Auth::id();
         $product->image_url = $request->image_url;
-        $product->save();
+        $product->update();
         return redirect()->action([ProductController::class, 'index'])->with('message', "$product->name updated");
     }
 

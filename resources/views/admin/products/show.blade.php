@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                             <div class="edit d-flex justify-content-end">
-                                <form action="{{route('admin.products.edit', ['product'=>$product->slug])}}" method="get">
+                                <form action="{{route('admin.products.edit', $product->slug)}}" method="get">
                                     @csrf
                                     <button type="submit" class="btn btn-primary mx-3">Edit</button>
                                 </form>
