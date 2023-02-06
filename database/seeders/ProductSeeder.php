@@ -45,7 +45,12 @@ class ProductSeeder extends Seeder
 
     public static function storeimage($url, $_name)
     {
-        $contents = file_get_contents($url);
+        $contents = file_get_contents($url, false, stream_context_create([
+            "ssl" => [
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+            ],
+        ]));
         $name = $_name . '.jpg';
         $path = 'images/' . $name;
         Storage::put('images/' . $name, $contents);
