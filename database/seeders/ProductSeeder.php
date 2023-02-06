@@ -21,18 +21,18 @@ class ProductSeeder extends Seeder
         DB::statement("SET foreign_key_checks = 0;");
         Product::truncate();
         $products = config('recipe');
-        // foreach ($products as $product) {
-        //     $newproduct = new Product();
-        //     $newproduct->name = $product['title'];
-        //     $newproduct->slug = Str::slug($product['title']);
-        //     $newproduct->price = $faker->randomFloat(2, 1, 30);
-        //     $newproduct->available = true;
-        //     $newproduct->discount = $faker->randomDigitNotNull() * 10;
-        //     $newproduct->ingredients = $product['ingredients'];
-        //     $newproduct->restaurant_id = $product['restaurant_id'];
-        //     $newproduct->image_url = $product['image'];
-        //     $newproduct->save();
-        // }
+        foreach ($products as $product) {
+            $newproduct = new Product();
+            $newproduct->name = $product['title'];
+            $newproduct->slug = Str::slug($product['title']);
+            $newproduct->price = $faker->randomFloat(2, 1, 30);
+            $newproduct->available = true;
+            $newproduct->discount = $faker->randomDigitNotNull() * 10;
+            $newproduct->ingredients = $product['ingredients'];
+            $newproduct->restaurant_id = $product['restaurant_id'];
+            $newproduct->image_url = $product['image'];
+            $newproduct->save();
+        }
         DB::statement("SET foreign_key_checks = 1;");
     }
 }

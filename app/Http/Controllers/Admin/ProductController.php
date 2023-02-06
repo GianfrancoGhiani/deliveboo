@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\ProductController;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -16,7 +19,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $restaurantId = Auth::id();
+        $products = Product::where('restaurant_id', $restaurantId)->get();
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -26,7 +31,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.products.create');
     }
 
     /**
@@ -37,7 +42,18 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $newproduct = new Product();
+        $newproduct->name = $request->name;
+        $newproduct->slug = Str::slug($request->name);
+        $newproduct->ingredients = $request->ingredients;
+
+        $newproduct->price = $request->price;
+        $newproduct->available = true;
+        $newproduct->discount = null;
+        $newproduct->restaurant_id = Auth::id();
+        $newproduct->image_url = $request->image_url;
+        $newproduct->save();
+        return redirect()->action([ProductController::class, 'index'])->with('message', "$newproduct->name created");
     }
 
     /**
@@ -48,7 +64,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('admin.products.show', compact('product'));
     }
 
     /**
@@ -59,7 +75,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
@@ -70,7 +86,16 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $product->name = $request->name;
+        $product->slug = Str::slug($request->name);
+        $product->ingredients = $request->ingredients;
+        $product->price = $request->price;
+        $product->available = true;
+        $product->discount = null;
+        $product->restaurant_id = Auth::id();
+        $product->image_url = $request->image_url;
+        $product->save();
+        return redirect()->action([ProductController::class, 'index'])->with('message', "$product->name updated");
     }
 
     /**
@@ -81,6 +106,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->action([ProductController::class, 'index'])->with('message', "$product->name deleted");
     }
 }
