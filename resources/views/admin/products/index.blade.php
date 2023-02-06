@@ -37,7 +37,7 @@
                     <td style="width: 30rem">{{$product->ingredients}}</td>
 
                     {{-- preview --}}
-                    <td style="width: 5rem"><img src="{{$product->image_url}}" alt="" class="w-100"></td>
+                    <td style="width: 5rem"><img src="{{asset('storage/' . $product->image_url)}}" alt="" class="w-100"></td>
 
                     {{-- category --}}
                     <td class="text-end">{{$product->category ? $product->category->name : 'Senza categoria'}}</td>
