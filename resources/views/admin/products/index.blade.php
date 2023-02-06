@@ -11,9 +11,9 @@
         {{ session()->get('message') }}
     </div>
     @endif
-    <table class="table bg-secondary">
+    <table class="table bg-dark-light">
         <thead>
-        <tr class="text-center text-white">
+        <tr class="text-center">
             <th scope="col">#</th>
             <th scope="col">prodotto</th>
             <th scope="col">ingredienti</th>

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card bg-secondary">
+            <div class="card bg-dark-light">
             <div class="text-center pt-4">
             <img src="{{url('/logo-deliveboo.png')}}" alt="Image" width="200px" />
             <h1 class="orange">Deliveboo</h1>

@@ -1,26 +1,25 @@
 @use './partials/variables' as *;
+
 $fa-font-path: "../fonts/font-awesome" !default;
 
 // $theme-color: (
 //     "table-color": #f2f2f2,
 // );
-$dark:  #0F0F0F;
-$secondary: #282828;
-$white: #bebebe;
+
 @import '~bootstrap/scss/bootstrap';
 // body{
 //     color: #f2f2f2;
 // }
 
-// .bg-dark-mode{
-//     background-color: #0F0F0F;
-//     color: #F2F2F2;
-// }
+.bg-dark-mode{
+    background-color: #0F0F0F;
+    color: #F2F2F2;
+}
 
-// .bg-dark-light{
-//     background-color: #282828;
-//     color: #F2F2F2;
-// }
+.bg-dark-light{
+    background-color: #282828;
+    color: #F2F2F2;
+}
 
 #admin {
     height: 100vh;
@@ -42,7 +41,7 @@ $white: #bebebe;
     }
 
     #sidebarMenu {
-        background-color: $my-main;
+        background-color: #FC8019;
         color: white;
     }
 }
@@ -71,7 +70,7 @@ $white: #bebebe;
 .nav-dashboard{
     a{
         text-decoration: none;
-        color: $my-main;
+        color: #FC8019;
     }
 }
 
@@ -95,15 +94,7 @@ $white: #bebebe;
 }
 
 
-// background 
-.bg-dark-mode{
-    background-color: #0F0F0F;
-    color: #F2F2F2;
-}
 
-.bg-dark-light{
-    background-color: #282828;
-}
 
 
 //show
@@ -136,4 +127,5 @@ $white: #bebebe;
             }
         }
     }
+
 }
