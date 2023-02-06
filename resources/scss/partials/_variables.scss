@@ -1,0 +1,16 @@
+// color palette
+$my-main: #FC8019;
+$my-secondary: #E8AC00;
+$my-greenblue: #129490;
+$my-green: #70B77E;
+$my-dark: #1e1e1e;
+$white-txt: #F2F2F2;
+
+
+
+// overwriting bootstrap
+$theme-colors: (
+  "primary": #FC8019,
+  "secondary": #E8AC00,
+  "danger": #e93127,
+);
