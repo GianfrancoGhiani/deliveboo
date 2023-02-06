@@ -1,3 +1,4 @@
+@use './partials/variables' as *;
 $fa-font-path: "../fonts/font-awesome" !default;
 
 // $theme-color: (
@@ -41,7 +42,7 @@ $white: #bebebe;
     }
 
     #sidebarMenu {
-        background-color: #FC8019;
+        background-color: $my-main;
         color: white;
     }
 }
@@ -70,7 +71,7 @@ $white: #bebebe;
 .nav-dashboard{
     a{
         text-decoration: none;
-        color: #FC8019;
+        color: $my-main;
     }
 }
 
@@ -83,4 +84,56 @@ $white: #bebebe;
 }
 .debug{
     border: 1px solid black;
+   color: $my-main;
+}
+.bolding{
+    font-weight: bold;
+    width: fit-content;
+    hr{
+        border:1px solid $my-main;
+    }
+}
+
+
+// background 
+.bg-dark-mode{
+    background-color: #0F0F0F;
+    color: #F2F2F2;
+}
+
+.bg-dark-light{
+    background-color: #282828;
+}
+
+
+//show
+#showProduct{
+    h1{
+        &::first-letter{
+            color: darken($color: $my-main, $amount: 3);
+        }
+
+    }
+    img.shadow{
+        outline-offset: 3px;
+        outline: 3px solid $my-main;
+    }
+    .price-through{
+        color: darken($color: $my-main, $amount: 3);
+
+        font-size: 80%;
+    }
+    .edit{
+        position: absolute;
+        bottom: 0;
+        right: 1rem;
+        button{
+            color: $white-txt;
+            font-weight: 900;
+            text-transform: uppercase;
+            &:hover{
+                border: 1px solid $white-txt;
+            }
+        }
+    }
 }
