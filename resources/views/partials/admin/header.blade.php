@@ -1,5 +1,5 @@
 <header>
-    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-dark-mode">
         <!-- Container wrapper -->
         <div class="container-fluid">
           <!-- Toggle button -->
@@ -8,13 +8,13 @@
           </button>
 
           <!-- Right links -->
-          <ul class="navbar-nav ms-auto d-flex flex-row">
+          <ul class="navbar-nav ms-auto d-flex flex-row bg-dark-mode">
           <div id="main-menu text-end dropdown-menu-left">
-            <nav class="navbar-nav container navbar-light nav-dashboard">
-                <ul class="navbar-nav pull-right">
+            <nav class="navbar-nav container bg-dark-mode nav-dashboard">
+                <ul class="navbar-nav pull-right bg-dark-mode">
                     <li class="nav-item dropdown">
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <img src="{{url('/logo-out-icon.png')}}"  height="22" alt="Avatar" /> {{ __('Logout') }}
+                            <img src="{{url('/logo-out-icon-white.png')}}"  height="22" alt="Avatar" /> {{ __('Logout') }}
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -36,11 +36,11 @@
         <!-- Notification dropdown -->
 
         <div id="main-menu text-end dropdown-menu-left">
-            <nav class="navbar-nav container navbar-light nav-dashboard">
+            <nav class="navbar-nav container navbar-dark nav-dashboard">
                 <ul class="navbar-nav pull-right">
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle text-capitalize" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <img src="{{url('/github-avatar.png')}}" class="rounded-circle" height="22" alt="Avatar" />
+                        <img src="{{url('/github-avatar-white.png')}}" class="rounded-circle" height="22" alt="Avatar" />
                         {{ Auth::user()->name }}
                         </a>
 
@@ -59,6 +59,4 @@
                 </ul>
             </nav>
         </div>
-
-
 </header>
