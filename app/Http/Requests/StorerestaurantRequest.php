@@ -13,7 +13,7 @@ class StorerestaurantRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,22 @@ class StorerestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'address' => 'required', 
+            'piva' => 'required|unique',
+            'opening_time' => 'required',
+            'closing_time' => 'required'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'il nome è obbligatorio',
+            'address.required' => 'Il campo è obbligatorio',
+            'piva.required' => 'Il campo è obbligatorio',
+            'piva.unique' => 'Il campo deve contentere una combinazione alfanumerica univoca',
+            'opening_time' => 'Il campo è obbligatorio',
+            'closing_time' => 'Il campo è obbligatorio',
         ];
     }
 }
