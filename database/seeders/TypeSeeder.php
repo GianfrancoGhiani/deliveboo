@@ -19,7 +19,7 @@ class TypeSeeder extends Seeder
     {
         DB::statement("SET foreign_key_checks = 0;");
         Type::truncate();
-        $types = ['italian pizza', 'pasta', 'burger', 'chinese rice', 'dolci', 'indian rice', 'japanese sushi', 'kebab'];
+        $types = ['italian pizza', 'pasta', 'burger', 'chinese rice', 'dolci', 'indian rice', 'japanese sushi', 'kebab', 'vegan'];
 
         foreach ($types as $type) {
             $newtype = new Type();
