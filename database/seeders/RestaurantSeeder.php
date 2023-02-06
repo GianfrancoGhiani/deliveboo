@@ -23,17 +23,17 @@ class RestaurantSeeder extends Seeder
         DB::statement("SET foreign_key_checks = 0;");
         Restaurant::truncate();
         // dd($faker->ein());
-        for ($i = 0; $i < 9; $i++) {
-
+        $restaurants = config('recipe.restaurants');
+        for ($i = 0; $i < count($restaurants); $i++) {
             $newrestaurant = new Restaurant();
-            $newrestaurant->name = $faker->company();
+            $newrestaurant->name = $restaurants[$i]['name'];
             $newrestaurant->slug = Str::slug($newrestaurant->name);
-            $newrestaurant->address = $faker->streetName() . ', ' . $faker->buildingNumber() . ', ' . 'New York';
-            $newrestaurant->tel_num = $faker->phoneNumber();
+            $newrestaurant->address = $restaurants[$i]['address'];
+            $newrestaurant->tel_num = $restaurants[$i]['phone'];
+            $newrestaurant->image_url = $restaurants[$i]['image_url'];
             $newrestaurant->opening_time = $faker->time();
             $newrestaurant->closing_time = $faker->time();
             $newrestaurant->piva = $faker->ein();
-            //$newrestaurant->type_id = $i + 1;
             $newrestaurant->user_id = $i + 1;
             $newrestaurant->save();
         }

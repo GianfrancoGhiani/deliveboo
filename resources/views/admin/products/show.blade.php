@@ -40,7 +40,7 @@
             </div>
             <div class="col-4">
                 @if($product->image_url)
-                    <img class="w-100 shadow rounded-2" src="{{$product->image_url}}" alt="{{ $product->name }}">
+                    <img class="w-100 shadow rounded-2" src="{{asset('storage/'.$product->image_url)}}" alt="{{ $product->name }}">
                 @else
                     <img class="w-100 shadow rounded-2" src="https://dummyimage.com/1200x840/000/fff" alt="C/O https://dummyimage.com/">
                 @endif

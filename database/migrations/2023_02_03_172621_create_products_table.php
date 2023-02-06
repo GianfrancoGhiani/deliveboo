@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('price', 4, 2);
             $table->boolean('available');
             $table->integer('discount')->nullable();
-            $table->text('ingredients');
+            $table->text('ingredients')->nullable();
             $table->string('image_url');
 
             //link to restaurant table
