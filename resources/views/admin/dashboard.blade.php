@@ -4,9 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-            <div class="text-center">
-            <!--<img src="{{url('/logo-app-black.png')}}" alt="Image" width="200px" />-->
+            <div class="card bg-dark-light">
+            <div class="text-center pt-4">
+            <img src="{{url('/logo-deliveboo.png')}}" alt="Image" width="200px" />
             <h1 class="orange">Deliveboo</h1>
             </div>
                 <div class="card-header">
@@ -32,7 +32,14 @@
                 </a>
             </li>
                 <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() == 'admin.products.index' ? '' : '' }}" href="{{route('admin.products.index')}}">
                     <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Products
+                </a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() == 'admin.orders.index' ? '' : '' }}" href="#">
+                    <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Orders
+                </a>
                 </li>
             
                 </ul>

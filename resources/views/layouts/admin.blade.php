@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ 'Make App' }}</title>
+    <title>{{ 'Deliveboo' }}</title>
 
 
     <!-- Fonts -->
@@ -19,7 +19,7 @@
     @vite(['resources/js/app.js'])
 </head>
 
-<body class="z-index">
+<body class="z-index bg-dark-mode">
  <div id="admin">
     @include('partials.admin.sidebar')
 
