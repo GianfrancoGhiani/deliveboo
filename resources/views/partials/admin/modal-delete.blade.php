@@ -11,7 +11,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-          <button type="button" class="btn btn-primary">Elimina</button>
+          <button type="button" class="btn btn-danger">Elimina</button>
         </div>
       </div>
     </div>
