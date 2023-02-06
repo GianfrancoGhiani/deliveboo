@@ -25,11 +25,11 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'price' => 'required|between:0,99.99', 
+            'price' => 'required|between:0,99.99',
             'available' => 'required',
             'discount' => 'nullable',
             'ingredients' => 'required',
-            'image_url' => 'required|image'
+            'image_url' => 'image'
         ];
     }
     public function messages()
@@ -39,9 +39,8 @@ class StoreProductRequest extends FormRequest
             'price.between' => 'Il prezzo deve essere compreso tra 0 e 99,99',
             'available.required' => 'Il campo è obbligatorio',
             'ingredients.required' => 'Il campo è obbligatorio',
-            'image_url.required' => 'Il campo è obbligatorio',
             'image_url.image' => 'Il campo deve contenere un immagine',
-         
+
         ];
     }
 }

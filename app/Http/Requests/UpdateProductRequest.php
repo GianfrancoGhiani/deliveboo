@@ -30,7 +30,7 @@ class UpdateProductRequest extends FormRequest
             'available' => 'required',
             'discount' => 'nullable',
             'ingredients' => 'required',
-            'image_url' => ['required', 'image'],
+            'image_url' => ['image'],
             'restaurant_id' => 'nullable'
         ];
     }

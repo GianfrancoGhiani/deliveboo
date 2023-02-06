@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('available');
             $table->integer('discount')->nullable();
             $table->text('ingredients')->nullable();
-            $table->string('image_url');
+            $table->string('image_url')->nullable();
 
             //link to restaurant table
             $table->unsignedBigInteger('restaurant_id');
