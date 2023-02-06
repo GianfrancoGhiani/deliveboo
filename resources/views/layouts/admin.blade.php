@@ -21,7 +21,7 @@
     @vite(['resources/js/app.js'])
 </head>
 
-<body class="z-index bg-dark-mode">
+<body class="z-index bg-dark-mode text-white">
  <div id="admin">
     @include('partials.admin.sidebar')
 

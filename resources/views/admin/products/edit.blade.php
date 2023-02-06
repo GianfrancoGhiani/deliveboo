@@ -6,10 +6,10 @@
 
         <h1>Edit Product: {{ $product->name }}</h1>
         @section('content')
-            <form action="{{ route('admin.products.update') }}" method="POST" enctype="multipart/form-data" class="p-4">
+            <form action="{{ route('admin.products.update', $product->slug) }}" method="POST" enctype="multipart/form-data" class="p-4">
             @csrf
             @method('PUT')
-                <div class="row bg-white">
+                <div class="row bg-dark-light">
     
                     <div class="col-6">
     
@@ -71,12 +71,13 @@
                         </div>
     
                     </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
                 </div>
     
-                <div class="text-center">
-                    <button type="submit" class="btn btn-success">Submit</button>
-                    <button type="reset" class="btn btn-warning">Reset</button>
-                </div>
+                
             </form>
 
 @endsection
