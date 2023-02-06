@@ -11,9 +11,9 @@
         {{ session()->get('message') }}
     </div>
     @endif
-    <table class="table table-striped">
+    <table class="table bg-secondary">
         <thead>
-        <tr class="text-center">
+        <tr class="text-center text-white">
             <th scope="col">#</th>
             <th scope="col">prodotto</th>
             <th scope="col">ingredienti</th>
@@ -24,7 +24,7 @@
             <th scope="col">Delete</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="text-white">
         @foreach($products as $product)
                 <tr>
                     {{-- # --}}
