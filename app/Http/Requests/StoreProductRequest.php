@@ -29,7 +29,7 @@ class StoreProductRequest extends FormRequest
             'available' => 'required',
             'discount' => 'nullable',
             'ingredients' => 'required',
-            'image_url' => 'required|image|size:1024'
+            'image_url' => 'required|image'
         ];
     }
     public function messages()
@@ -41,7 +41,7 @@ class StoreProductRequest extends FormRequest
             'ingredients.required' => 'Il campo è obbligatorio',
             'image_url.required' => 'Il campo è obbligatorio',
             'image_url.image' => 'Il campo deve contenere un immagine',
-            'image_url.size' => 'L immagine non può superare 1mb'
+         
         ];
     }
 }

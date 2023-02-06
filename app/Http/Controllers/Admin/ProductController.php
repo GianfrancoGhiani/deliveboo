@@ -45,13 +45,13 @@ class ProductController extends Controller
         $newproduct->name = $request->name;
         $newproduct->slug = Str::slug($request->name);
         $newproduct->ingredients = $request->ingredients;
-
         $newproduct->price = $request->price;
-        $newproduct->available = true;
-        $newproduct->discount = null;
+        $newproduct->available = $request->available;
+        $newproduct->discount = $request->discount;
         $newproduct->restaurant_id = Auth::id();
         $newproduct->image_url = $request->image_url;
         $newproduct->save();
+        
         return redirect()->action([ProductController::class, 'index'])->with('message', "$newproduct->name created");
     }
 
