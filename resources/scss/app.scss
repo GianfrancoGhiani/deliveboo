@@ -47,6 +47,9 @@ $fa-font-path: "../fonts/font-awesome" !default;
         background-color: $my-main;
         color: $white-txt;
         flex-shrink: 0;
+        a{
+            color: $white-txt;
+        }
     }
 }
 
@@ -65,10 +68,12 @@ $fa-font-path: "../fonts/font-awesome" !default;
     list-style: none;
 
     li{
+       
         background-color: transparent;
     } :hover{
         background-color: $my-main;
     }
+   
 }
 
 .nav-dashboard{
@@ -120,7 +125,7 @@ $fa-font-path: "../fonts/font-awesome" !default;
     }
     .edit{
         position: absolute;
-        bottom: -3rem;
+        bottom: -4rem;
         right: 1rem;
         button{
             color: $white-txt;

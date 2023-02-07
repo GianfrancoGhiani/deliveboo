@@ -31,7 +31,7 @@
                     <th scope="row">{{$product->id}}</th>
 
                     {{-- prodotto --}}
-                    <td><a href="{{route('admin.products.show', $product->slug)}}" title="View Product">{{$product->name}}</a></td>
+                    <td><a href="{{route('admin.products.show', $product->slug)}}" class="text-white text-decoration-none" title="View Product">{{$product->name}}</a></td>
 
                     {{-- ingredienti --}}
                     <td style="width: 30rem">{{$product->ingredients}}</td>

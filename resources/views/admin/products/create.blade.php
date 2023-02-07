@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Create a new Product</h1>
-
-        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="p-4">
+   
+        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
             <div class="row bg-dark-light">
+                <h1>Create a new Product</h1>
 
                 <div class="col-6">
 

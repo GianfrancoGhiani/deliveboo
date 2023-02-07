@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="container my-5" id="showProduct">
-        <div class="row">
+        <div class="row bg-dark-light p-3">
             <div class="col-8 position-relative">
                 <div class="row col-12">
                     <div class="row">

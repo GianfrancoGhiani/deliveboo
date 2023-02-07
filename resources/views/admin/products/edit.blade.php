@@ -4,13 +4,13 @@
 
 @include('partials.admin.error-session')
 
-        <h1>Edit Product: {{ $product->name }}</h1>
+       
         @section('content')
-            <form action="{{ route('admin.products.update', $product->slug) }}" method="POST" enctype="multipart/form-data" class="p-4">
+            <form action="{{ route('admin.products.update', $product->slug) }}" method="POST" enctype="multipart/form-data" >
             @csrf
             @method('PUT')
                 <div class="row bg-dark-light">
-    
+                    <h1>Edit Product: {{ $product->name }}</h1>
                     <div class="col-6">
     
                         <div class="mb-3">
