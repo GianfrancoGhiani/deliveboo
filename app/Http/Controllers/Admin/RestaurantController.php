@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 use App\Models\restaurant;
 use App\Http\Requests\StorerestaurantRequest;
 use App\Http\Requests\UpdaterestaurantRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class RestaurantController extends Controller
 {
@@ -24,29 +28,41 @@ class RestaurantController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function create()
     {
-        //
+
+
+        return view('admin.restaurants.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StorerestaurantRequest  $request
-     * @return \Illuminate\Http\Response
+     * 
      */
-    public function store(StorerestaurantRequest $request)
+    public function store(Request $request)
     {
         //
+        dd($request);
+        $newRestaurant = new Restaurant();
+        $newRestaurant->name = $request->name;
+        // $newproduct->slug = Str::slug($request->name);
+        // $newproduct->ingredients = $request->ingredients;
+        // $newproduct->price = $request->price;
+        // $newproduct->available = $request->available;
+        // $newproduct->discount = $request->discount;
+        // $newproduct->restaurant_id = Auth::id();
+        return view('admin.restaurant.index');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\restaurant  $restaurant
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function show(restaurant $restaurant)
     {
