@@ -37,11 +37,11 @@ class UpdateProductRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'il nome è obbligatorio',
-            'price.between' => 'Il prezzo deve essere compreso tra 0 e 99,99',
-            'available.required' => 'Il campo è obbligatorio',
-            'ingredients.required' => 'Il campo è obbligatorio',
-            'image_url.image' => 'Il campo deve contenere un immagine'
+            'name.required' => 'The name is required',
+            'price.between' => 'The price must be between 0 and 99.99',
+            'available.required' => 'The field is required',
+            'ingredients.required' => 'The field is required',
+            'image_url.image' => 'The field must contain an image'
         ];
     }
 }

@@ -34,12 +34,12 @@ class StorerestaurantRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'il nome è obbligatorio',
-            'address.required' => 'Il campo è obbligatorio',
-            'piva.required' => 'Il campo è obbligatorio',
-            'piva.unique' => 'Il campo deve contentere una combinazione alfanumerica univoca',
-            'opening_time' => 'Il campo è obbligatorio',
-            'closing_time' => 'Il campo è obbligatorio',
+            'name.required' => 'The name is required',
+            'address.required' => 'The field is required',
+            'piva.required' => 'The field is required',
+            'piva.unique' => 'The field must contain a unique alphanumeric combination',
+            'opening_time' => 'The field is required',
+            'closing_time' => 'The field is required',
         ];
     }
 }
