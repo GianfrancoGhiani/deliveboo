@@ -23,24 +23,24 @@ $theme-colors: (
   
 );
 
-$base-color: #d13b20;
+// $base-color: #d13b20;
 
-@function generate-shades($color, $shades) {
-  $shade-list: ();
-  $step: (50% / $shades);
+// @function generate-shades($color, $shades) {
+//   $shade-list: ();
+//   $step: (50% / $shades);
   
-  @for $i from 1 through $shades {
-    $shade: lighten($color, $i * $step);
-    $shade-list: append($shade-list, $shade);
-  }
+//   @for $i from 1 through $shades {
+//     $shade: lighten($color, $i * $step);
+//     $shade-list: append($shade-list, $shade);
+//   }
   
-  @return $shade-list;
-}
+//   @return $shade-list;
+// }
 
-$shade-list: generate-shades($base-color, 5);
+// $shade-list: generate-shades($base-color, 5);
 
-@for $i from 1 through 5 {
-  .shade-#{$i} {
-    background-color: nth($shade-list, $i);
-  }
-}
+// @for $i from 1 through 5 {
+//   .shade-#{$i} {
+//     background-color: nth($shade-list, $i);
+//   }
+// }

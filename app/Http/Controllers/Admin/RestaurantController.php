@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\restaurant;
-use App\Http\Requests\StorerestaurantRequest;
-use App\Http\Requests\UpdaterestaurantRequest;
+use App\Models\Restaurant;
+use App\Http\Requests\StoreRestaurantRequest;
+use App\Http\Requests\UpdateRestaurantRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +18,7 @@ class RestaurantController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function index()
     {
@@ -32,39 +32,37 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-
-
         return view('admin.restaurants.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorerestaurantRequest  $request
+     * @param  \App\Http\Requests\StoreRestaurantRequest  $request
      * 
      */
     public function store(Request $request)
     {
-        //
+
         dd($request);
-        $newRestaurant = new Restaurant();
-        $newRestaurant->name = $request->name;
+        // $newRestaurant = new Restaurant();
+        // $newRestaurant->name = $request->name;
         // $newproduct->slug = Str::slug($request->name);
         // $newproduct->ingredients = $request->ingredients;
         // $newproduct->price = $request->price;
         // $newproduct->available = $request->available;
         // $newproduct->discount = $request->discount;
         // $newproduct->restaurant_id = Auth::id();
-        return view('admin.restaurant.index');
+        return view('admin.restaurants.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\restaurant  $restaurant
+     *
      * 
      */
-    public function show(restaurant $restaurant)
+    public function show(Restaurant $restaurant)
     {
         //
     }
@@ -72,10 +70,9 @@ class RestaurantController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\restaurant  $restaurant
-     * @return \Illuminate\Http\Response
+     *
      */
-    public function edit(restaurant $restaurant)
+    public function edit(Restaurant $restaurant)
     {
         //
     }
@@ -83,11 +80,10 @@ class RestaurantController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdaterestaurantRequest  $request
-     * @param  \App\Models\restaurant  $restaurant
-     * @return \Illuminate\Http\Response
+     * 
+     *
      */
-    public function update(UpdaterestaurantRequest $request, restaurant $restaurant)
+    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
         //
     }
@@ -95,10 +91,10 @@ class RestaurantController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\restaurant  $restaurant
-     * @return \Illuminate\Http\Response
+     * 
+     * 
      */
-    public function destroy(restaurant $restaurant)
+    public function destroy(Restaurant $restaurant)
     {
         //
     }
