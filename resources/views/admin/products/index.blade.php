@@ -4,7 +4,7 @@
 
 <h1 class="">Products</h1>
 <div class="text-end">
-        <a class="btn btn-secondary border border-1" href="{{route('admin.products.create')}}">Aggiugi Prodotto</a>
+        <a class="btn btn-info border border-1" href="{{route('admin.products.create')}}">Aggiugi Prodotto</a>
 </div>
     @if(session()->has('message'))
     <div class="alert alert-success mb-3 mt-3">
@@ -25,7 +25,7 @@
                 <th scope="col">Delete</th>
             </tr>
             </thead>
-            <tbody class="text-indigos shade-1">
+            <tbody class="text-indigos">
             @foreach($products as $product)
                     <tr>
                         {{-- # --}}

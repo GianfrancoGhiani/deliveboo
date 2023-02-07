@@ -31,6 +31,7 @@ $fa-font-path: "../fonts/font-awesome" !default;
     #wrapper {
         flex-grow: 1;
         overflow-y: auto;
+        // width: calc(100% - 200px);
 
         header {
             min-height: 70px;
@@ -45,18 +46,19 @@ $fa-font-path: "../fonts/font-awesome" !default;
     #sidebarMenu {
         background-color: $my-main;
         color: $white-txt;
+        flex-shrink: 0;
     }
 }
 
 
-.table-wrapper{
-    height: 650px;
-    padding: 10px 0;
-}
+// .table-wrapper{
+//     height: 650px;
+//     padding: 10px 0;
+// }
 
-.image-container{
-    width: 50px;
-}
+// .image-container{
+//     width: 50px;
+// }
 
 //Style Dashboard
 .dashboard-list{
@@ -72,7 +74,7 @@ $fa-font-path: "../fonts/font-awesome" !default;
 .nav-dashboard{
     a{
         text-decoration: none;
-        color: #FC8019;
+        color: $my-main;
     }
 }
 
@@ -81,7 +83,7 @@ $fa-font-path: "../fonts/font-awesome" !default;
 }
 
 .orange{
-   color: #FC8019;
+   color: $my-main;
 }
 .debug{
     border: 1px solid black;
