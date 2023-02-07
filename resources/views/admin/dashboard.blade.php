@@ -10,8 +10,8 @@
             <h1 class="orange">Deliveboo</h1>
             </div>
                 <div class="card-header">
-                    <p>Benvenuto <span class="text-capitalize">{{ Auth::user()->name }} </span></p>
-                    <p>Questa è la tua {{ __('dashboard') }}</p></div>
+                    <p>Welcome <span class="text-capitalize">{{ Auth::user()->name }} </span></p>
+                    <p>This is your {{ __('dashboard') }}</p></div>
 
                 <div class="card-body">
                     @if (session('status'))
