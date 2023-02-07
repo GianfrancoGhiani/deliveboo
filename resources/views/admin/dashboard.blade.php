@@ -21,7 +21,7 @@
                     </div>
                     @endif
 
-                    {{__('Hai effettuato correttamente la login, ora sei pronto per gestire il tuo store') }}
+                    {{__('You have successfully logged in, now you are ready to manage your store') }}
                 </div>
 
                 <div>

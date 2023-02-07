@@ -40,7 +40,7 @@
                     <td style="width: 5rem"><img src="{{asset('storage/' . $product->image_url)}}" alt="" class="w-100"></td>
 
                     {{-- category --}}
-                    <td class="text-end">{{$product->category ? $product->category->name : 'Senza categoria'}}</td>
+                    <td class="text-end">{{$product->category ? $product->category->name : 'Without category'}}</td>
 
                     {{-- price --}}
                     <td class="text-end">€ {{$product?->price}}</td>
