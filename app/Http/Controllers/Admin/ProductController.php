@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -49,7 +50,11 @@ class ProductController extends Controller
         $newproduct->available = $request->available;
         $newproduct->discount = $request->discount;
         $newproduct->restaurant_id = Auth::id();
-        $newproduct->image_url = $request->image_url;
+        if ($request->hasFile('image_url')) {
+            $path = Storage::disk('public')->put('images/', $request->image_url);
+            $newproduct['image_url'] = $path;
+        }
+
         if (count(Product::where('restaurant_id', Auth::id())->where('name', $newproduct->name)->get())) {
             return back()->with('message', 'name is taken!');
         }

@@ -40,7 +40,17 @@ deleteSubmitButtons.forEach((button) => {
    })
 });
 
+//funzione per la preview dell'immagine da caricare
 
+const previewImage = document.getElementById('image_url');
+previewImage.addEventListener('change', (event) =>{
+    var oFReader = new FileReader();
+    oFReader.readAsDataURL(previewImage.files[0]);
+
+    oFReader.onload = function (oFREvent) {
+        document.getElementById("uploadPreview").src = oFREvent.target.result;
+    };
+});
 
 //questo non so cosè
 // $("#menu-toggle").click(function(e) {
