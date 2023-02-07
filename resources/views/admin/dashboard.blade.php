@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
+<div id="dashboard" class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card bg-dark-light">
@@ -26,7 +26,7 @@
 
                 <div>
                 <ul class="flex-column dashboard-list">
-            <li class="nav-item">
+            <li class="nav-item shade-1">
                 <a class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? '' : '' }}" href="{{route('admin.dashboard')}}">
                 <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> Dashboard
                 </a>

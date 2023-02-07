@@ -1,10 +1,15 @@
 // color palette
-$my-main: #FC8019;
+$my-main: #FC8019; /*#FC8019*/
 $my-secondary: #E8AC00;
 $my-greenblue: #129490;
 $my-green: #70B77E;
 $my-dark: #1e1e1e;
 $white-txt: #F2F2F2;
+
+
+$bg-youtube-dark: #0F0F0F;
+$bg-youtube-light: #282828;
+
 
 
 
@@ -14,3 +19,25 @@ $theme-colors: (
   "secondary": #E8AC00,
   "danger": #e93127,
 );
+
+$base-color: #d13b20;
+
+@function generate-shades($color, $shades) {
+  $shade-list: ();
+  $step: (50% / $shades);
+  
+  @for $i from 1 through $shades {
+    $shade: lighten($color, $i * $step);
+    $shade-list: append($shade-list, $shade);
+  }
+  
+  @return $shade-list;
+}
+
+$shade-list: generate-shades($base-color, 5);
+
+@for $i from 1 through 5 {
+  .shade-#{$i} {
+    background-color: nth($shade-list, $i);
+  }
+}

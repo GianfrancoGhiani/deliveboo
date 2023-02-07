@@ -6,19 +6,21 @@ $fa-font-path: "../fonts/font-awesome" !default;
 //     "table-color": #f2f2f2,
 // );
 
+
 @import '~bootstrap/scss/bootstrap';
+
 // body{
 //     color: #f2f2f2;
 // }
 
 .bg-dark-mode{
-    background-color: #0F0F0F;
-    color: #F2F2F2;
+    background-color: $bg-youtube-dark;
+    color: $white-txt;
 }
 
 .bg-dark-light{
-    background-color: #282828;
-    color: #F2F2F2;
+    background-color: $bg-youtube-light;
+    color: $white-txt;
 }
 
 #admin {
@@ -41,8 +43,8 @@ $fa-font-path: "../fonts/font-awesome" !default;
     }
 
     #sidebarMenu {
-        background-color: #FC8019;
-        color: white;
+        background-color: $my-main;
+        color: $white-txt;
     }
 }
 
@@ -63,7 +65,7 @@ $fa-font-path: "../fonts/font-awesome" !default;
     li{
         background-color: transparent;
     } :hover{
-        background-color: #b04f00;
+        background-color: $my-main;
     }
 }
 

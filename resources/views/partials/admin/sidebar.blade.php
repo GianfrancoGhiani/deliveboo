@@ -9,12 +9,12 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ Route::currentRouteName() == 'admin.products.index' ? '' : '' }}" href="{{route('admin.products.index')}}">
+            <a class="nav-link {{ Route::currentRouteName() == 'admin.products.index' ? 'bg-secondary' : '' }}" href="{{route('admin.products.index')}}">
                 <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Products
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ Route::currentRouteName() == 'admin.products.index' ? '' : '' }}" href="#">
+            <a class="nav-link {{ Route::currentRouteName() == 'admin.orders.index' ? '' : '' }}" href="#">
                 <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Orders
             </a>
         </li>
