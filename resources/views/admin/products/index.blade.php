@@ -3,7 +3,7 @@
 @section('content')
 
 <h1 class="">Products</h1>
-<div class="text-end">
+<div class="text-end py-2">
         <a class="btn btn-success border border-1 " href="{{route('admin.products.create')}}">Add a Product</a>
 </div>
     @if(session()->has('message'))
