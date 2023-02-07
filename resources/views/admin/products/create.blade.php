@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Crete a new Product</h1>
+    <h1>Create a new Product</h1>
 
         <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="p-4">
         @csrf
 
-            <div class="row bg-white">
+            <div class="row bg-dark-light">
 
                 <div class="col-6">
 
@@ -49,7 +49,7 @@
                     <div class="mb-3">
                         <label for="available" class="form-label">Available</label>
                         <input type="radio" name="available" value="1" checked>
-                        <span class="text-capitalize">si</span>
+                        <span class="text-capitalize">yes</span>
                         <input type="radio" name="available" value="0" >
                         <span class="text-capitalize">no</span>
                         @error('available')
@@ -71,8 +71,8 @@
             </div>
 
             <div class="text-center">
-                <button type="submit" class="btn btn-success">Create</button>
-                <button type="reset" class="btn btn-warning">Reset</button>
+                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
             </div>
         </form>
 
