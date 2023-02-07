@@ -12,10 +12,10 @@ use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+    * Display a listing of the resource.
+    *
     
-     */
+    */
     public function index()
     {
         $restaurantId = Auth::id();
@@ -24,21 +24,21 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
+    * Show the form for creating a new resource.
+    *
     
-     */
+    */
     public function create()
     {
         return view('admin.products.create');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreProductRequest  $request
+    * Store a newly created resource in storage.
+    *
+    * @param  \App\Http\Requests\StoreProductRequest  $request
     
-     */
+    */
     public function store(StoreProductRequest $request)
     {
         $newproduct = new Product();
@@ -50,39 +50,51 @@ class ProductController extends Controller
         $newproduct->discount = $request->discount;
         $newproduct->restaurant_id = Auth::id();
         $newproduct->image_url = $request->image_url;
+        if (count(Product::where('restaurant_id', Auth::id())->where('name', $newproduct->name)->get())) {
+            return back()->with('message', 'name is taken!');
+        }
+
         $newproduct->save();
 
         return redirect()->action([ProductController::class, 'index'])->with('message', "$newproduct->name created");
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
+    * Display the specified resource.
+    *
+    * @param  \App\Models\Product  $product
     
-     */
+    */
     public function show(Product $product)
     {
-        return view('admin.products.show', compact('product'));
+        $restaurantId = Auth::id();
+        if ($product->restaurant->id == $restaurantId) {
+
+            return view('admin.products.show', compact('product'));
+        } else {
+            return abort(404);
+        }
+
+
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
+    * Show the form for editing the specified resource.
+    *
+    * @param  \App\Models\Product  $product
     
-     */
+    */
     public function edit(Product $product)
     {
         return view('admin.products.edit', compact('product'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Models\Product  $product
+    * Update the specified resource in storage.
+    *
+    * @param  \App\Models\Product  $product
     
-     */
+    */
     public function update(UpdateProductRequest $request, Product $product)
     {
         dd($product);
@@ -99,11 +111,11 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
+    * Remove the specified resource from storage.
+    *
+    * @param  \App\Models\Product  $product
     
-     */
+    */
     public function destroy(Product $product)
     {
         $product->delete();

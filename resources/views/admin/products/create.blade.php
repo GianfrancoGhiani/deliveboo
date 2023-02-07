@@ -1,8 +1,14 @@
 @extends('layouts.admin')
 
 @section('content')
-   
-        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+@if(session()->has('message'))
+<div class="alert alert-danger mb-3 mt-3">
+    {{ session()->get('message') }}
+</div>
+@endif
+    <h1>Creazione prodotto</h1>
+
+        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="p-4">
         @csrf
 
             <div class="row bg-dark-light">
