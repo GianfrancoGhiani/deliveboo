@@ -42,7 +42,7 @@ deleteSubmitButtons.forEach((button) => {
 
 //funzione per la preview dell'immagine da caricare
 
-const previewImage = document.getElementById('image_url');
+const previewImage = document.getElementById('input_file_img');
 previewImage.addEventListener('change', (event) =>{
     var oFReader = new FileReader();
     oFReader.readAsDataURL(previewImage.files[0]);

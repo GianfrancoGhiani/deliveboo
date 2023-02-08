@@ -61,10 +61,10 @@
                         </div>
                        
                         <div class="mb-3">
-                            <img id="uploadPreview" width="100" src=" {{ $product->image_url ? asset('storage/'.old('image_url', $product->image_url)) : 'https://via.placeholder.com/300x200'}}">
+                            <img id="uploadPreview" width="100" src="{{ $product->image_url ? asset('storage/'.old('image_url', $product->image_url)) : 'https://via.placeholder.com/300x200'}}">
                             <label for="image_url" class="form-label">Image</label>
                       
-                            <input type="file" name="image_url" id="create_cover_image" class="form-control mt-3 @error('image_url') is-invalid @enderror" >
+                            <input type="file" name="image_url" id="input_file_img" class="form-control mt-3 @error('image_url') is-invalid @enderror" >
     
                             @error('image_url')
                                 <div class="invalid-feedback">{{ $message }}</div>
