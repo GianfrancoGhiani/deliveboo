@@ -25,10 +25,10 @@ class StoreRestaurantRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'address' => 'required', 
-            'piva' => 'required|unique',
-            'opening_time' => 'required',
-            'closing_time' => 'required'
+            // 'address' => 'required', 
+            // 'piva' => 'required|unique',
+            // 'opening_time' => 'required',
+            // 'closing_time' => 'required'
         ];
     }
     public function messages()

@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Restaurant;
 use App\Http\Requests\StoreRestaurantRequest;
-use App\Http\Requests\UpdateRestaurantRequest;
+use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -38,21 +36,24 @@ class RestaurantController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreRestaurantRequest  $request
+     * 
      * 
      */
-    public function store(Request $request)
+    public function store(StoreRestaurantRequest $request)
     {
 
-        dd($request);
-        // $newRestaurant = new Restaurant();
-        // $newRestaurant->name = $request->name;
-        // $newproduct->slug = Str::slug($request->name);
+        dd($request->get('name'));
+        $newRestaurant = new Restaurant();
+        $newRestaurant->name = $request->name;
+        $newRestaurant->slug = Str::slug($request->name);
+        $newRestaurant->address = 'via roma, 30';
+        $newRestaurant->piva = '19823982';
         // $newproduct->ingredients = $request->ingredients;
         // $newproduct->price = $request->price;
         // $newproduct->available = $request->available;
         // $newproduct->discount = $request->discount;
         // $newproduct->restaurant_id = Auth::id();
+        $newRestaurant->save();
         return view('admin.restaurants.index');
     }
 
