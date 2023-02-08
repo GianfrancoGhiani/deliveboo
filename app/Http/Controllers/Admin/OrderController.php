@@ -20,12 +20,13 @@ class OrderController extends Controller
     public function index()
     {
         //
-        $orders = Order::where('restaurant_id' == Auth::user()->id)->get();
+        // dd(Order::all());
+        $orders = Order::where('restaurant_id', Auth::id())->get();
         if ($orders) {
 
             return view('admin.orders.index', compact('orders'));
         }
-        return view('admin.orders.index');
+        return view('admin.products.index');
     }
 
     /**
@@ -35,8 +36,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
-
+        return view('admin.orders.create');
     }
 
     /**
@@ -48,11 +48,41 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request)
     {
 
+
+        //inizializziamo la creazione del prodotto
+        $neworder = new Order();
+
+        //passiamo i dati convalidati dalla request creata "StoreProductRequest"
+        $neworder->customer_firstname = $request->customer_firstname;
+        $neworder->customer_lastname = $request->customer_lastname;
+        $neworder->customer_email = $request->customer_email;
+        $neworder->customer_address = $request->customer_address;
+        // $neworder->available = $request->available;
+        // $neworder->discount = $request->discount;
+        // $neworder->restaurant_id = Auth::id();
+
+
+        // $neworder->save();
+
+        // return redirect()->action([ProductController::class, 'index'])->with('message', "$newproduct->name created");
     }
 
     public function show(Order $order)
     {
-        //
+        $restaurantId = Auth::id();
+
+        $tempOrder = Order::where('id', $order->id)->where('restaurant_id', $restaurantId)->with('products')->first();
+
+        if ($tempOrder) {
+
+            $order = $tempOrder;
+            // $products = 
+            return view('admin.orders.show', compact('order'));
+        } else {
+
+            //se non esiste il prodotto ritorniamo una pagina 404 not found
+            return abort(404);
+        }
     }
 
     /**
