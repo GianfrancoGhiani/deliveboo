@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -73,22 +72,17 @@ class ProductController extends Controller
     */
     public function show(Product $product)
     {
-
         $restaurantId = Auth::id();
-        if (count(Product::where('restaurant_id', Auth::id())->where('name', $product->name)->get())) {
-            return back()->with('message', 'name is taken!');
-        } else {
 
-            $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
+        $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
 
-            if ($tempProd) {
-                $product = $tempProd;
-                return view('admin.products.show', compact('product'));
-            } else {
-                return abort(404);
-            }
-        }
         // dd($tempProd);
+        if ($tempProd) {
+            $product = $tempProd;
+            return view('admin.products.show', compact('product'));
+        } else {
+            return abort(404);
+        }
 
     }
 
@@ -101,6 +95,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $restaurantId = Auth::id();
+
         $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
         // dd($tempProd);
         if ($tempProd) {
@@ -120,7 +115,13 @@ class ProductController extends Controller
     */
     public function update(UpdateProductRequest $request, Product $product)
     {
+
         $restaurantId = Auth::id();
+
+        //controllo che 
+        if (count(Product::where('restaurant_id', $restaurantId)->where('name', $request->name)->get())) {
+            return back()->with('message', 'name is taken!');
+        }
         $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
         // dd($tempProd);
         if ($tempProd) {
@@ -151,7 +152,6 @@ class ProductController extends Controller
     */
     public function destroy(Product $product)
     {
-
         $restaurantId = Auth::id();
         $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
         // dd($tempProd);
