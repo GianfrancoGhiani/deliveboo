@@ -32,8 +32,8 @@ class StoreTypeRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'il nome è obbligatorio',
-            'description.required' => 'Il campo è obbligatorio',
+            'name.required' => 'The name is required',
+            'description.required' => 'The field is required',
            
         ];
     }

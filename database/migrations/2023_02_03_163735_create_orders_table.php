@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('customer_email');
             $table->string('customer_address');
             $table->string('customer_tel');
-            $table->float('price', 4, 2);
+            $table->float('price', 6, 2);
             $table->boolean('paid');
-            $table->boolean('fulfilled');
+            $table->text('description');
 
             //link to restaurant table
             $table->unsignedBigInteger('restaurant_id');

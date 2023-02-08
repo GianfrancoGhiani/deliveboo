@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -25,22 +26,22 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'price' => ['required','between:0,99.99'], 
+            'price' => ['required', 'between:0,99.99'],
             'available' => 'required',
             'discount' => 'nullable',
             'ingredients' => 'required',
-            'image_url' => ['required','image','size:1024']
+            'image_url' => ['image'],
+            'restaurant_id' => 'nullable'
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => 'il nome è obbligatorio',
-            'price.between' => 'Il prezzo deve essere compreso tra 0 e 99,99',
-            'available.required' => 'Il campo è obbligatorio',
-            'ingredients.required' => 'Il campo è obbligatorio',
-            'image_url.image' => 'Il campo deve contenere un immagine',
-            'image_url.size' => 'L immagine non può superare 1mb'
+            'name.required' => 'The name is required',
+            'price.between' => 'The price must be between 0 and 99.99',
+            'available.required' => 'The field is required',
+            'ingredients.required' => 'The field is required',
+            'image_url.image' => 'The field must contain an image'
         ];
     }
 }

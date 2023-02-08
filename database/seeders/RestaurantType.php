@@ -60,8 +60,6 @@ class RestaurantType extends Seeder
 
 
 
-
-
         foreach ($restaurants_types as $restaurant) {
             foreach ($restaurant['types'] as $type)
 

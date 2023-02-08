@@ -1,9 +1,27 @@
+@use './partials/variables' as *;
+
 $fa-font-path: "../fonts/font-awesome" !default;
 
+// $theme-color: (
+//     "table-color": #f2f2f2,
+// );
 
 
 @import '~bootstrap/scss/bootstrap';
 
+// body{
+//     color: #f2f2f2;
+// }
+
+.bg-dark-mode{
+    background-color: $bg-youtube-dark;
+    color: $white-txt;
+}
+
+.bg-dark-light{
+    background-color: $bg-youtube-light;
+    color: $white-txt;
+}
 
 #admin {
     height: 100vh;
@@ -13,6 +31,7 @@ $fa-font-path: "../fonts/font-awesome" !default;
     #wrapper {
         flex-grow: 1;
         overflow-y: auto;
+        // width: calc(100% - 200px);
 
         header {
             min-height: 70px;
@@ -25,36 +44,42 @@ $fa-font-path: "../fonts/font-awesome" !default;
     }
 
     #sidebarMenu {
-        background-color: #FC8019;
-        color: white;
+        background-color: $my-main;
+        color: $white-txt;
+        flex-shrink: 0;
+        a{
+            color: $white-txt;
+        }
     }
 }
 
 
-.table-wrapper{
-    height: 650px;
-    padding: 10px 0;
-}
+// .table-wrapper{
+//     height: 650px;
+//     padding: 10px 0;
+// }
 
-.image-container{
-    width: 50px;
-}
+// .image-container{
+//     width: 50px;
+// }
 
 //Style Dashboard
 .dashboard-list{
     list-style: none;
 
     li{
+       
         background-color: transparent;
     } :hover{
-        background-color: transparent;
+        background-color: $my-main;
     }
+   
 }
 
 .nav-dashboard{
     a{
         text-decoration: none;
-        color: #FC8019;
+        color: $my-main;
     }
 }
 
@@ -63,5 +88,53 @@ $fa-font-path: "../fonts/font-awesome" !default;
 }
 
 .orange{
-   color: #FC8019;
+    color: $my-main;
+}
+.debug{
+    border: 1px solid black;
+    color: $my-main;
+}
+.bolding{
+    font-weight: bold;
+    width: fit-content;
+    hr{
+        border:1px solid $my-main;
+    }
+}
+
+
+
+
+
+//show
+#showProduct{
+    h1{
+        &::first-letter{
+            color: darken($color: $my-main, $amount: 3);
+        }
+
+    }
+    img.shadow{
+        outline-offset: 3px;
+        outline: 3px solid $my-main;
+    }
+    .price-through{
+        color: darken($color: $my-main, $amount: 3);
+
+        font-size: 80%;
+    }
+    .edit{
+        position: absolute;
+        bottom: -4rem;
+        right: 1rem;
+        button{
+            color: $white-txt;
+            font-weight: 900;
+            text-transform: uppercase;
+            &:hover{
+                border: 1px solid $white-txt;
+            }
+        }
+    }
+
 }

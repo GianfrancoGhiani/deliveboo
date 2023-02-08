@@ -20,8 +20,8 @@ return new class extends Migration
             $table->float('price', 4, 2);
             $table->boolean('available');
             $table->integer('discount')->nullable();
-            $table->text('ingredients');
-            $table->string('image_url');
+            $table->text('ingredients')->nullable();
+            $table->string('image_url')->nullable();
 
             //link to restaurant table
             $table->unsignedBigInteger('restaurant_id');

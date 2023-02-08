@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorerestaurantRequest extends FormRequest
+class StoreRestaurantRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,22 +24,24 @@ class StorerestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:restaurants',
             'address' => 'required', 
-            'piva' => 'required|unique',
+            'piva' => 'required|unique:restaurants',
             'opening_time' => 'required',
-            'closing_time' => 'required'
+            'closing_time' => 'required',
+            'tel_num'=> 'required',
+            'image_url'=> 'required',
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => 'il nome è obbligatorio',
-            'address.required' => 'Il campo è obbligatorio',
-            'piva.required' => 'Il campo è obbligatorio',
-            'piva.unique' => 'Il campo deve contentere una combinazione alfanumerica univoca',
-            'opening_time' => 'Il campo è obbligatorio',
-            'closing_time' => 'Il campo è obbligatorio',
+            'name.required' => 'The name is required',
+            'address.required' => 'The field is required',
+            'piva.required' => 'The field is required',
+            'piva.unique' => 'The field must contain a unique alphanumeric combination',
+            'opening_time' => 'The field is required',
+            'closing_time' => 'The field is required',
         ];
     }
 }

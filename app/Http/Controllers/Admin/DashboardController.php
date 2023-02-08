@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -19,6 +21,13 @@ class DashboardController extends Controller
         //     session()->put('logged_in', true);
         // }
 
-        return view('admin.dashboard');
+        if (Auth::user()->restaurant) {
+            // dd('hai il ristorante');
+            return view('admin.dashboard');
+        } else {
+            // dd('non hai il ristorante');
+            return redirect()->route('admin.restaurants.create');
+        }
+
     }
 }

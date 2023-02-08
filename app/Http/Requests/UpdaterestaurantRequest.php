@@ -4,7 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-class UpdaterestaurantRequest extends FormRequest
+
+class UpdateRestaurantRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +25,7 @@ class UpdaterestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-          //
+            //
         ];
     }
 

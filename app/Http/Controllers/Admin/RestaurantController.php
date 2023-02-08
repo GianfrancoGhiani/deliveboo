@@ -5,16 +5,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\restaurant;
-use App\Http\Requests\StorerestaurantRequest;
-use App\Http\Requests\UpdaterestaurantRequest;
+use App\Http\Requests\StoreRestaurantRequest;
+use App\Models\Restaurant;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use App\Models\Type;
 
 class RestaurantController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function index()
     {
@@ -24,31 +27,57 @@ class RestaurantController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function create()
     {
-        //
+        if(count(Restaurant::where('user_id', Auth::id())->get())){
+            return redirect()->route('admin.dashboard');
+        }
+        $types = Type::all();
+        return view('admin.restaurants.create',compact('types'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorerestaurantRequest  $request
-     * @return \Illuminate\Http\Response
+     * 
+     * 
      */
-    public function store(StorerestaurantRequest $request)
+    public function store(StoreRestaurantRequest $request)
     {
-        //
-    }
+
+
+        $newRestaurant = new Restaurant();
+        $newRestaurant->name = $request->name;
+        $newRestaurant->slug = Str::slug($request->name);
+        $newRestaurant->address = $request->address;
+        $newRestaurant->piva = $request->piva;
+        $newRestaurant->opening_time = $request->opening_time;
+        $newRestaurant->closing_time = $request->closing_time;
+        $newRestaurant->user_id = Auth::id();
+        $newRestaurant->tel_num = $request->tel_num;
+      
+        if ($request->hasFile('image_url')) {
+            $path = Storage::disk('public')->put('images/', $request->image_url);
+            $newRestaurant['image_url'] = $path;
+        }
+        $newRestaurant->save();
+        
+        if ($request->has('types')) {
+            $newRestaurant->types()->attach($request->types);
+        }
+        return view('admin.dashboard');
+        }
+        
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\restaurant  $restaurant
-     * @return \Illuminate\Http\Response
+     *
+     * 
      */
-    public function show(restaurant $restaurant)
+    public function show(Restaurant $restaurant)
     {
         //
     }
@@ -56,10 +85,9 @@ class RestaurantController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\restaurant  $restaurant
-     * @return \Illuminate\Http\Response
+     *
      */
-    public function edit(restaurant $restaurant)
+    public function edit(Restaurant $restaurant)
     {
         //
     }
@@ -67,11 +95,10 @@ class RestaurantController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdaterestaurantRequest  $request
-     * @param  \App\Models\restaurant  $restaurant
-     * @return \Illuminate\Http\Response
+     * 
+     *
      */
-    public function update(UpdaterestaurantRequest $request, restaurant $restaurant)
+    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
         //
     }
@@ -79,10 +106,10 @@ class RestaurantController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\restaurant  $restaurant
-     * @return \Illuminate\Http\Response
+     * 
+     * 
      */
-    public function destroy(restaurant $restaurant)
+    public function destroy(Restaurant $restaurant)
     {
         //
     }
