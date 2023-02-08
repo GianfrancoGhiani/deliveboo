@@ -51,7 +51,7 @@ class ProductSeeder extends Seeder
                 "verify_peer_name" => false,
             ],
         ]));
-        $name = $_name . '.jpg';
+        $name = str_replace("/", "", str_replace(" ", "", $_name)) . '.jpg';
         $path = 'images/' . $name;
         Storage::put('images/' . $name, $contents);
         return $path;
