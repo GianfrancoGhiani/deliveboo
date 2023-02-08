@@ -14,7 +14,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ Route::currentRouteName() == 'admin.orders.index' ? '' : '' }}" href="#">
+            <a class="nav-link {{ Route::currentRouteName() == 'admin.orders.index' ? '' : '' }}" href="{{route('admin.orders.index')}}">
                 <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Orders
             </a>
         </li>

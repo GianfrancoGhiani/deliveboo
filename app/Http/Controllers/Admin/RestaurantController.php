@@ -31,11 +31,13 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        if(count(Restaurant::where('user_id', Auth::id())->get())){
+
+        //accorciato codice
+        if (Auth::user()->restaurant) {
             return redirect()->route('admin.dashboard');
         }
         $types = Type::all();
-        return view('admin.restaurants.create',compact('types'));
+        return view('admin.restaurants.create', compact('types'));
     }
 
     /**
@@ -57,19 +59,19 @@ class RestaurantController extends Controller
         $newRestaurant->closing_time = $request->closing_time;
         $newRestaurant->user_id = Auth::id();
         $newRestaurant->tel_num = $request->tel_num;
-      
+
         if ($request->hasFile('image_url')) {
             $path = Storage::disk('public')->put('images/', $request->image_url);
             $newRestaurant['image_url'] = $path;
         }
         $newRestaurant->save();
-        
+
         if ($request->has('types')) {
             $newRestaurant->types()->attach($request->types);
         }
         return view('admin.dashboard');
-        }
-        
+    }
+
 
     /**
      * Display the specified resource.
