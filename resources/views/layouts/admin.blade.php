@@ -36,6 +36,7 @@
  </div>
 
   <!--Main layout-->
+  @include('partials.admin.modal-delete')
 </body>
 
 </html>

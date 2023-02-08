@@ -31,7 +31,7 @@
                                 <form action="{{route('admin.products.destroy',['product'=>$product->slug])}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-secondary dng my-delete">DELETE</button>
+                                    <button type="submit" class="btn btn-secondary dng delete-button">DELETE</button>
                                 </form>
                             </div>
                         </div>
