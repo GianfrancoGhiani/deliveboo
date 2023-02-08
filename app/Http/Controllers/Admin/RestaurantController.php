@@ -10,6 +10,7 @@ use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Models\Type;
 
 class RestaurantController extends Controller
 {
@@ -30,7 +31,11 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('admin.restaurants.create');
+        if(count(Restaurant::where('user_id', Auth::id())->get())){
+            return redirect()->route('admin.dashboard');
+        }
+        $types = Type::all();
+        return view('admin.restaurants.create',compact('types'));
     }
 
     /**
@@ -42,20 +47,29 @@ class RestaurantController extends Controller
     public function store(StoreRestaurantRequest $request)
     {
 
-        dd($request->get('name'));
+
         $newRestaurant = new Restaurant();
         $newRestaurant->name = $request->name;
         $newRestaurant->slug = Str::slug($request->name);
-        $newRestaurant->address = 'via roma, 30';
-        $newRestaurant->piva = '19823982';
-        // $newproduct->ingredients = $request->ingredients;
-        // $newproduct->price = $request->price;
-        // $newproduct->available = $request->available;
-        // $newproduct->discount = $request->discount;
-        // $newproduct->restaurant_id = Auth::id();
+        $newRestaurant->address = $request->address;
+        $newRestaurant->piva = $request->piva;
+        $newRestaurant->opening_time = $request->opening_time;
+        $newRestaurant->closing_time = $request->closing_time;
+        $newRestaurant->user_id = Auth::id();
+        $newRestaurant->tel_num = $request->tel_num;
+      
+        if ($request->hasFile('image_url')) {
+            $path = Storage::disk('public')->put('images/', $request->image_url);
+            $newRestaurant['image_url'] = $path;
+        }
         $newRestaurant->save();
-        return view('admin.restaurants.index');
-    }
+        
+        if ($request->has('types')) {
+            $newRestaurant->types()->attach($request->types);
+        }
+        return view('admin.dashboard');
+        }
+        
 
     /**
      * Display the specified resource.

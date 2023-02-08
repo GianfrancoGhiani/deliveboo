@@ -24,11 +24,13 @@ class StoreRestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            // 'address' => 'required', 
-            // 'piva' => 'required|unique',
-            // 'opening_time' => 'required',
-            // 'closing_time' => 'required'
+            'name' => 'required|unique:restaurants',
+            'address' => 'required', 
+            'piva' => 'required|unique:restaurants',
+            'opening_time' => 'required',
+            'closing_time' => 'required',
+            'tel_num'=> 'required',
+            'image_url'=> 'required',
         ];
     }
     public function messages()
