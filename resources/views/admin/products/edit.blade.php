@@ -33,7 +33,7 @@
     
                         <div class="mb-3">
                             <label for="discount" class="form-label">Discount</label>
-                            <input type="number" step="0.01" max="90" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount" placeholder="0" value="{{old('discount', $product->discount)}}">
+                            <input type="number" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount" placeholder="0" value="{{old('discount', $product->discount)}}">
     
                             @error('discount')
                                 <div class="invalid-feedback">{{ $message }}</div>
