@@ -51,10 +51,10 @@
     
                         <div class="mb-3">
                             <label for="available" class="form-label">Available</label>
-                            <input type="radio" name="available" value="1" {{old('available', $product->available) == 1 ? 'checked' : ''}}>
-                            <span class="text-capitalize">yes</span>
-                            <input type="radio" name="available" value="0" {{old('available', $product->available) == 0 ? 'checked' : ''}}>
-                            <span class="text-capitalize">no</span>
+                            <input id="available-yes" type="radio" name="available" value="1" {{old('available', $product->available) == 1 ? 'checked' : ''}}>
+                            <label for="available-yes" class="text-capitalize">yes</label>
+                            <input id="available-no" type="radio" name="available" value="0" {{old('available', $product->available) == 0 ? 'checked' : ''}}>
+                            <label for="available-no" class="text-capitalize">no</label>
                             @error('available')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
