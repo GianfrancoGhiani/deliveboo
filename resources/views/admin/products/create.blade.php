@@ -6,7 +6,6 @@
     {{ session()->get('message') }}
 </div>
 @endif
-    <h1>Creazione prodotto</h1>
 
         <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="p-4">
         @csrf
@@ -36,7 +35,7 @@
 
                     <div class="mb-3">
                         <label for="discount" class="form-label">Discount</label>
-                        <input type="number" step="0.01" max="90" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount" placeholder="0">
+                        <input type="number" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount" placeholder="0">
 
                         @error('discount')
                             <div class="invalid-feedback">{{ $message }}</div>
