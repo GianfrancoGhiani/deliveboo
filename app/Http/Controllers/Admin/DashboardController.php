@@ -23,11 +23,13 @@ class DashboardController extends Controller
 
         if (Auth::user()->restaurant) {
             // dd('hai il ristorante');
-            return view('admin.dashboard');
+
+            $restaurant = Restaurant::where('user_id', Auth::id())->first();
+            // dd($restaurant);
+            return view('admin.dashboard', compact('restaurant'));
         } else {
             // dd('non hai il ristorante');
             return redirect()->route('admin.restaurants.create');
         }
-
     }
 }

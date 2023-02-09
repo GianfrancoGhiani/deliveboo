@@ -1,13 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
-    <section class="container my-5" id="showProduct">
+    <section class="container-fluid p-3" id="showProduct">
         <div class="row bg-dark-light p-3">
             <div class="col-8 position-relative">
                 <div class="row col-12">
                     <div class="row">
                         <div class="col-12 ">
-                            <h1 class="mb-2">{{$product->name}}</h1>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h1 class="mb-2">{{$product->name}}</h1><a class="btn btn-primary back" href="{{route('admin.products.index')}}" title="Go back to Products"><i class="fa-solid fa-rotate-left"></i></a>
+                            </div>
                             <div class="mb-2 d-flex align-items-baseline">
                                 @if ($product->discount)
                                     <h4>Price:</h4>
@@ -23,7 +25,7 @@
                                     {{$product->ingredients}}
                                 </div>
                             </div>
-                            <div class="edit d-flex justify-content-end">
+                            <div class="edit d-flex justify-content-start">
                                 <form action="{{route('admin.products.edit', $product->slug)}}" method="get">
                                     @csrf
                                     <button type="submit" class="btn btn-primary mx-3">Edit</button>
@@ -33,6 +35,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-secondary dng delete-button">DELETE</button>
                                 </form>
+
                             </div>
                         </div>
                     </div>

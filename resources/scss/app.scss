@@ -107,9 +107,28 @@ $fa-font-path: "../fonts/font-awesome" !default;
     background-color: $my-dark;
 }
 
+#indexOrder{
+    th,td{
+        text-align: left;
+    }
+    a{
+        color: $white-txt;
+        text-decoration: none;
+    }
 
+}
+#showOrder{
+    a{
+        color: $my-dark;
+        font-weight: 800;
+        text-transform: uppercase;
+        &:hover{
+            border: 1px solid $my-dark;
+        }
+    }
+}
 
-//show
+//show Product
 #showProduct{
     h1{
         &::first-letter{
@@ -131,13 +150,36 @@ $fa-font-path: "../fonts/font-awesome" !default;
         bottom: -4rem;
         right: 1rem;
         button{
-            color: $white-txt;
+            color: $my-dark;
             font-weight: 900;
             text-transform: uppercase;
             &:hover{
-                border: 1px solid $white-txt;
+                border: 1px solid $my-dark;
             }
         }
     }
+    .back{
+        i{
+            font-weight: 800;
+        vertical-align: middle;
+        line-height: 2rem ;
+        height: 2rem;
+        }
+    }
 
+
+}
+
+
+
+//editProduct
+#editProduct{
+    .back{
+        i{
+            font-weight: 800;
+        vertical-align: middle;
+        line-height: 2rem ;
+        height: 2rem;
+        }
+    }
 }

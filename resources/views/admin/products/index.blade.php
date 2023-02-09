@@ -13,15 +13,15 @@
     @endif
     <table class="table bg-dark-light">
         <thead>
-        <tr class="text-center">
+        <tr >
             <th scope="col">#</th>
             <th scope="col">Product</th>
             <th scope="col">Ingredients</th>
             <th scope="col">Preview</th>
-            <th scope="col">Category</th>
-            <th scope="col">Price</th>
+            <th scope="col" class="text-center">Category</th>
+            <th scope="col"  class="text-center">Price</th>
             <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            <th scope="col"  class="text-center">Delete</th>
         </tr>
         </thead>
         <tbody class="text-white">
@@ -40,19 +40,19 @@
                     <td style="width: 5rem"><img src="{{asset('storage/' . $product->image_url)}}" alt="" class="w-100"></td>
 
                     {{-- category --}}
-                    <td class="text-end">{{$product->category ? $product->category->name : 'Without category'}}</td>
+                    <td class="text-center">{{$product->category ? $product->category->name : 'Without category'}}</td>
 
                     {{-- price --}}
-                    <td class="text-end">€ {{$product?->price}}</td>
+                    <td class="text-center">€ {{$product?->price}}</td>
 
                     {{-- edit --}}
                     <td>
-                        <a class="btn btn-info" href="{{route('admin.products.edit', $product->slug)}}" title="Edit Product"><i class="fa-solid fa-pen-ruler"></i></a>
+                        <a class="btn btn-info text-center" href="{{route('admin.products.edit', $product->slug)}}" title="Edit Product"><i class="fa-solid fa-pen-ruler"></i></a>
                     </td>
 
                     {{-- delete --}}
                     <td> 
-                        <form action="{{route('admin.products.destroy', $product->slug)}}" method="POST">
+                        <form action="{{route('admin.products.destroy', $product->slug)}}" method="POST"  class="text-center">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="delete-button btn btn-danger" data-item-title="{{$product->name}}"><i class="fa-solid fa-trash-can"></i></button>

@@ -17,7 +17,7 @@ class Order extends Model
     // link to products
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot(['quantity']);
     }
     // link to restaurant
     public function restaurant(): BelongsTo
