@@ -29,16 +29,18 @@ $fa-font-path: "./webfonts" !default;
 
 #navbar-login a:not(#app-logo) {
     color: white !important;
-    border-radius: 10px;
+    border-radius: 2px 15px 2px 15px;
     position: relative;
     transform-origin: left;
     box-shadow: inset 0 0 0 0 #8D4408;
     margin: 0 .25rem;
-    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out, transform 0.3s;
 
     &:hover {
         background-color: #8D4408;
-        // color: black !important;
+        // color: #d72424 !important;
+        // font-weight: 600;
+        // transform: scale(1.1);
         box-shadow: inset 100px 0 0 0 #FC8019;
         // transform-origin: right;
     }
