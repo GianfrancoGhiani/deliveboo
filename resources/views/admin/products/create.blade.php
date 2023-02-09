@@ -61,10 +61,10 @@
                         </div>
                         
                         <div class="pb-3">
-                            <div for="image_url" class="form-label">Image<sup title="This field is required">*</sup></div>
+                            <div for="input_file_img" class="form-label">Image<sup title="This field is required">*</sup></div>
                         
                         
-                            <input type="file" name="image_url" id="input_file_img" class="form-control my-3 @error('image_url') is-invalid @enderror">
+                            <input type="file"  name="image_url" id="input_file_img" class="form-control my-3 @error('image_url') is-invalid @enderror">
                             <img id="uploadPreview" width="300" src="https://via.placeholder.com/300x200">
                             @error('image_url')
                                 <div class="invalid-feedback">{{ $message }}</div>

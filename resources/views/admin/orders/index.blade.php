@@ -35,6 +35,7 @@
                             </span>
                         </div>
                     </th>
+                    <th scope="col" class="text-capitalize text-center">time</th>
                     <th scope="col" class="text-capitalize">firstname</th>
                     <th scope="col" class="text-capitalize">lastname</th>
                     <th scope="col" class="text-capitalize">email</th>
@@ -46,28 +47,34 @@
                 </thead>
                 <tbody class="text-white">
                 @foreach($orders as $order)
-                        <tr >
+                        <tr>
+                            <a href="{{route('admin.orders.show', $order->id)}}">
                             {{-- # --}}
                             <th scope="row"><a href="{{route('admin.orders.show', $order->id)}}">View</a></th>
-                            {{-- prodotto --}}
+                            {{-- date --}}
                             <td style="width: 15rem" class="text-center">
-                                {{explode(" ",$order->created_at)[0]}}
+                                {{date('F d, Y', strtotime($order->updated_at)) }}
                             </td>
+                            {{-- hour --}}
+                            <td style="width: 15rem" class="text-center">
+                                {{date('h:i A', strtotime($order->updated_at)) }}
+                            </td>
+                            {{-- firstname --}}
                             <td style="width: 13rem">
                                 {{-- <a href="{{route('admin.orders.show', $order->id)}}" class="text-white text-decoration-none" title="View Product"> --}}
                                 {{$order->customer_firstname}}
                                 {{-- </a> --}}
                             </td>
-                            {{-- ingredienti --}}
+                            {{-- lastname --}}
                             <td style="width: 13rem">{{$order->customer_lastname}}</td>
-                            {{-- preview --}}
+                            {{-- email --}}
                             <td>
                                 {{$order->customer_email}}
                                 {{-- <img src="{{asset('storage/' . $product->image_url)}}" alt="" class="w-100"> --}}
                             </td>
-                            {{-- category --}}
+                            {{-- paid --}}
                             <td class="text-center ">
-                                {{$order->paid}}
+                                {{$order->paid ? 'paid' : 'not paid'}}
                             </td>
                             {{-- price --}}
                             <td class="text-end">
@@ -87,6 +94,7 @@
                                     <button type="submit" class="delete-button btn btn-danger" data-item-title="{{$product->name}}"><i class="fa-solid fa-trash-can"></i></button>
                                 </form> --}}
                             </td>
+                            </a>
                         </tr>
                         @endforeach
                 </tbody>
