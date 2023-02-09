@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -17,11 +18,18 @@ class OrderController extends Controller
      *
      * 
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         // dd(Order::all());
-        $orders = Order::where('restaurant_id', Auth::id())->get();
+        $dateOrder = $request->input('dateOrder');
+        $orders = Order::where('restaurant_id', Auth::user()->restaurant->id)
+            ->when($dateOrder, function ($query, $dateOrder) {
+                $query->orderby('created_at', $dateOrder);
+            }, function ($query) {
+                $query->orderby('created_at', 'desc');
+            })
+            ->get();
         if ($orders) {
 
             return view('admin.orders.index', compact('orders'));
