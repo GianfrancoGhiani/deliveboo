@@ -14,16 +14,22 @@ use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     /**
-    * Display a listing of the resource.
-    *
+     * Display a listing of the resource.
+     *
     
-    */
+     */
     public function index()
     {
         //filtriamo i prodotti con una query build di laravel per visualizzare solo i prodotti di quel determinato ristorante
-        $restaurantId = Auth::id();
-        $products = Product::where('restaurant_id', $restaurantId)->get();
-        return view('admin.products.index', compact('products'));
+        if (Auth::user()->restaurant->id) {
+
+            $restaurantId = Auth::user()->restaurant->id;
+            $products = Product::where('restaurant_id', $restaurantId)->get();
+            return view('admin.products.index', compact('products'));
+        } else {
+            $types = Type::all();
+            return redirect()->route('admin.restaurants.create', compact('types'));
+        }
     }
 
     /**
@@ -32,8 +38,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-
-        return view('admin.products.create');
+        if (Auth::user()->restaurant->id) {
+            return view('admin.products.create');
+        } else {
+            $types = Type::all();
+            return redirect()->route('admin.restaurants.create', compact('types'));
+        }
     }
 
     /**
@@ -43,32 +53,37 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //inizializziamo la creazione del prodotto
-        $newproduct = new Product();
+        if (Auth::user()->restaurant->id) {
+            //inizializziamo la creazione del prodotto
+            $newproduct = new Product();
 
-        //passiamo i dati convalidati dalla request creata "StoreProductRequest"
-        $newproduct->name = $request->name;
-        $newproduct->slug = Str::slug($request->name);
-        $newproduct->ingredients = $request->ingredients;
-        $newproduct->price = $request->price;
-        $newproduct->available = $request->available;
-        $newproduct->discount = $request->discount;
-        $newproduct->restaurant_id = Auth::id();
+            //passiamo i dati convalidati dalla request creata "StoreProductRequest"
+            $newproduct->name = $request->name;
+            $newproduct->slug = Str::slug($request->name);
+            $newproduct->ingredients = $request->ingredients;
+            $newproduct->price = $request->price;
+            $newproduct->available = $request->available;
+            $newproduct->discount = $request->discount;
+            $newproduct->restaurant_id = Auth::user()->restaurant->id;
 
-        //se la request ha presente un file immagine lo andiamo a salvare al nuovo prodotto
-        if ($request->hasFile('image_url')) {
-            $path = Storage::disk('public')->put('images/', $request->image_url);
-            $newproduct['image_url'] = $path;
+            //se la request ha presente un file immagine lo andiamo a salvare al nuovo prodotto
+            if ($request->hasFile('image_url')) {
+                $path = Storage::disk('public')->put('images/', $request->image_url);
+                $newproduct['image_url'] = $path;
+            }
+
+            //controlliamo se il nome del nuovo prodotto è già presente nel suo ristorante, se è vero lo rimandiamo indietro con un messaggio di errore 
+            if (count(Product::where('restaurant_id', Auth::user()->restaurant->id)->where('name', $newproduct->name)->get())) {
+                return back()->with('message', 'This name is taken!');
+            }
+
+            $newproduct->save();
+
+            return redirect()->action([ProductController::class, 'index'])->with('message', "$newproduct->name created");
+        } else {
+            $types = Type::all();
+            return redirect()->route('admin.restaurants.create', compact('types'));
         }
-
-        //controlliamo se il nome del nuovo prodotto è già presente nel suo ristorante, se è vero lo rimandiamo indietro con un messaggio di errore 
-        if (count(Product::where('restaurant_id', Auth::id())->where('name', $newproduct->name)->get())) {
-            return back()->with('message', 'name is taken!');
-        }
-
-        $newproduct->save();
-
-        return redirect()->action([ProductController::class, 'index'])->with('message', "$newproduct->name created");
     }
 
     /**
@@ -78,27 +93,31 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //qui prendiamo direttamente l'id del utente perchè combacia con l'id del ristorante, avendo una relazione 1 a 1 
-        $restaurantId = Auth::id();
+        //qui prendiamo direttamente l'id ristorante associato all'utente
+        if (Auth::user()->restaurant->id) {
 
-        $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
+            $restaurantId = Auth::user()->restaurant->id;
 
-        //scommenta il dd della riga sotto per verificare che l'id del prodotto appartiene effettivamente al ristorante dell'utente loggato 
-        // dd($tempProd);
+            $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
 
-        //se il prodotto esiste mandiamo l'utente alla rotta show con il prodotto selezionato
-        if ($tempProd) {
+            //scommenta il dd della riga sotto per verificare che l'id del prodotto appartiene effettivamente al ristorante dell'utente loggato 
+            // dd($tempProd);
 
-            $product = $tempProd;
+            //se il prodotto esiste mandiamo l'utente alla rotta show con il prodotto selezionato
+            if ($tempProd) {
 
-            return view('admin.products.show', compact('product'));
+                $product = $tempProd;
 
+                return view('admin.products.show', compact('product'));
+            } else {
+
+                //se non esiste il prodotto ritorniamo un messaggio di errore
+                return back()->with('error', 'This product do not exist!');
+            }
         } else {
-
-            //se non esiste il prodotto ritorniamo una pagina 404 not found
-            return abort(404);
+            $types = Type::all();
+            return redirect()->route('admin.restaurants.create', compact('types'));
         }
-
     }
 
     /**
@@ -114,79 +133,78 @@ class ProductController extends Controller
         if (Auth::user()->restaurant->id) {
 
             $restaurantId = Auth::user()->restaurant->id;
-
+            //selezioniamo con una query il giusto prodotto associato a un determinato ristorante
             $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
+            //possiamo controllare con un dd()
+            // dd($tempProd);
+
 
             if ($tempProd) {
 
                 $product = $tempProd;
 
                 return view('admin.products.edit', compact('product'));
-
             } else {
-
-                return abort(404);
+                //se non esiste il prodotto ritorniamo un messaggio di errore
+                return back()->with('error', 'This product do not exist!');
             }
         } else {
             $types = Type::all();
             return redirect()->route('admin.restaurants.create', compact('types'));
         }
-
-        //selezioniamo con una query il giusto prodotto associato a un determinato ristorante
-
-        //possiamo controllare con un dd()
-        // dd($tempProd);
-
-
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param  \App\Models\Product  $product
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Models\Product  $product
     
-    */
+     */
     public function update(UpdateProductRequest $request, Product $product)
     {
 
-        $restaurantId = Auth::id();
+        if (Auth::user()->restaurant->id) {
 
-        //controllo che il nome del prodotto modificato non sia già presente nel db del ristorante
-        if (count(Product::where('restaurant_id', $restaurantId)->where('name', $request->name)->get())) {
-            return back()->with('message', 'name is taken!');
-        }
+            $restaurantId = Auth::user()->restaurant->id;
 
-        //creo una query per selezionare il giusto prodotto associato al ristorante 
-        $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
-
-        //sommenta sotto per controllare che l'id del prodotto sia quello associato al ristorante  
-        // dd($tempProd);
-        if ($tempProd) {
-            $product = $tempProd;
-            $product->name = $request->name;
-            $product->slug = Str::slug($request->name);
-            $product->ingredients = $request->ingredients;
-            $product->price = $request->price;
-            $product->available = $request->available;
-            $product->discount = $request->discount;
-            $product->restaurant_id = Auth::id();
-
-            //funzione per salvere l'immagine nel caso sia stata caricata
-            if ($request->hasFile('image_url')) {
-                $path = Storage::disk('public')->put('images/', $request->image_url);
-                $product['image_url'] = $path;
+            //controllo che il nome del prodotto modificato non sia già presente nel db del ristorante
+            if (count(Product::where('restaurant_id', $restaurantId)->where('name', $request->name)->get())) {
+                return back()->with('message', 'name is taken!');
             }
 
+            //creo una query per selezionare il giusto prodotto associato al ristorante 
+            $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
 
-            $product->update();
+            //sommenta sotto per controllare che l'id del prodotto sia quello associato al ristorante  
+            // dd($tempProd);
+            if ($tempProd) {
+                $product = $tempProd;
+                $product->name = $request->name;
+                $product->slug = Str::slug($request->name);
+                $product->ingredients = $request->ingredients;
+                $product->price = $request->price;
+                $product->available = $request->available;
+                $product->discount = $request->discount;
+                $product->restaurant_id = Auth::id();
 
-            //riporto l'utente all'index dei prodotto con un messaggio di successo 
-            return redirect()->action([ProductController::class, 'index'])->with('message', "$product->name updated");
+                //funzione per salvere l'immagine nel caso sia stata caricata
+                if ($request->hasFile('image_url')) {
+                    $path = Storage::disk('public')->put('images/', $request->image_url);
+                    $product['image_url'] = $path;
+                }
 
+
+                $product->update();
+
+                //riporto l'utente all'index dei prodotto con un messaggio di successo 
+                return redirect()->action([ProductController::class, 'index'])->with('message', "$product->name updated");
+            } else {
+                //se non esiste il prodotto ritorniamo un messaggio di errore
+                return back()->with('error', 'This product do not exist!');
+            }
         } else {
-
-            return abort(403);
-
+            $types = Type::all();
+            return redirect()->route('admin.restaurants.create', compact('types'));
         }
     }
 
@@ -198,22 +216,27 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
 
-        $restaurantId = Auth::id();
+        if (Auth::user()->restaurant->id) {
 
-        //query per selezionare il giusto prodotto
-        $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
+            $restaurantId = Auth::user()->restaurant->id;
 
-        // dd($tempProd);
-        if ($tempProd) {
+            //query per selezionare il giusto prodotto
+            $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
 
-            //cancella con una softdelete
-            $tempProd->delete();
+            // dd($tempProd);
+            if ($tempProd) {
 
-            return redirect()->action([ProductController::class, 'index'])->with('message', "$tempProd->name deleted");
+                //cancella con una softdelete
+                $tempProd->delete();
 
+                return redirect()->action([ProductController::class, 'index'])->with('message', "$tempProd->name deleted");
+            } else {
+                //se non esiste il prodotto ritorniamo un messaggio di errore
+                return back()->with('error', 'This product do not exist!');
+            }
         } else {
-
-            return abort(403);
+            $types = Type::all();
+            return redirect()->route('admin.restaurants.create', compact('types'));
         }
     }
 }

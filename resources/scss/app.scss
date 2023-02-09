@@ -29,26 +29,50 @@ $fa-font-path: "../fonts/font-awesome" !default;
     display: flex;
 
     #wrapper {
-        flex-grow: 1;
-        overflow-y: auto;
-        // width: calc(100% - 200px);
-
+        width: 100%;
+        height: 100vh;
+        overflow-y: hidden;
         header {
-            min-height: 70px;
-
+            height: 3rem;
             .img-profile {
                 height: 2rem;
                 width: 2rem;
             }
         }
+        main{
+            height: calc(100vh - 3rem);
+            overflow-y: auto;
+        }
+        .form-label{
+            &::first-letter{
+                color: $my-main;
+                font-weight: 500;
+            }
+        }
+        h1{
+            &::first-letter{
+                color: $my-main;
+            }
+    
+        }
     }
 
     #sidebarMenu {
-        background-color: $my-main;
+        background: linear-gradient(180deg, #8D4408 0%, rgba(170, 87, 19, 0.78) 59.82%, rgba(252, 128, 25, 0) 99.48%), linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, rgba(230, 183, 143, 0.74) 35.94%, #FC8019 100%);
         color: $white-txt;
         flex-shrink: 0;
+
         a{
             color: $white-txt;
+            border-radius: 2rem 0 0 2rem;
+            margin-left: 1rem;
+            border-left: 2px solid transparent;
+            border-bottom: 2px solid transparent;
+            &.active-item{
+                border-left: 2px solid $my-secondary;
+                border-bottom: 2px solid $my-secondary;
+                background: linear-gradient(16deg, rgba(232, 172, 0, 0.9) 0%, rgba(232, 172, 0, 0.37) 25.35%, rgba(232, 172, 0, 0) 58.89%);
+            }
         }
     }
 }
@@ -64,11 +88,25 @@ $fa-font-path: "../fonts/font-awesome" !default;
 // }
 
 //Style Dashboard
-.dashboard-list{
+#dashboard{
+    .card-header{
+        img{
+            width: 350px;
+            border-radius: .3rem;
+            outline-offset: 4px;
+            outline: 3px solid $my-main;
+        }
+        span{
+            font-style: italic;
+        }
+    }
+    .card-body{
+
+    }
+    .dashboard-list{
     list-style: none;
 
     li{
-       
         background-color: transparent;
     } :hover{
         background-color: $my-main;
@@ -82,7 +120,7 @@ $fa-font-path: "../fonts/font-awesome" !default;
         color: $my-main;
     }
 }
-
+}
 .z-index{
     z-index: -1000;
 }
@@ -107,6 +145,25 @@ $fa-font-path: "../fonts/font-awesome" !default;
     background-color: $my-dark;
 }
 
+//header
+#main-navbar{
+    // position: relative;
+    a, i{
+        color: $my-secondary;
+        text-decoration: none;
+    }
+}
+
+#indexProduct{
+    thead{
+        th{
+            font-size: 1.2rem;
+            &::first-letter{
+                color: $my-secondary;
+            }
+        }
+    }
+}
 #indexOrder{
     th,td{
         text-align: left;
@@ -114,6 +171,13 @@ $fa-font-path: "../fonts/font-awesome" !default;
     a{
         color: $white-txt;
         text-decoration: none;
+    }
+    .order{
+        color: $white-txt;
+        &:hover, &:active{
+            color: $my-main;
+            border-color: $my-main;
+        }
     }
 
 }
@@ -130,12 +194,7 @@ $fa-font-path: "../fonts/font-awesome" !default;
 
 //show Product
 #showProduct{
-    h1{
-        &::first-letter{
-            color: darken($color: $my-main, $amount: 3);
-        }
-
-    }
+    
     img.shadow{
         outline-offset: 3px;
         outline: 3px solid $my-main;
@@ -146,9 +205,9 @@ $fa-font-path: "../fonts/font-awesome" !default;
         font-size: 80%;
     }
     .edit{
-        position: absolute;
-        bottom: -4rem;
-        right: 1rem;
+        // position: absolute;
+        // bottom: 3rem;
+        // right: calc((100% / 3) + 3%) ;
         button{
             color: $my-dark;
             font-weight: 900;

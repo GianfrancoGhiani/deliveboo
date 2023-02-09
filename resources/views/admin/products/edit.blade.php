@@ -6,73 +6,73 @@
 
        
 @section('content')
-            <section id="editProduct">
-                <form action="{{ route('admin.products.update', $product->slug) }}" method="POST" enctype="multipart/form-data" >
-                @csrf
-                @method('PUT')
-                    <div class="row bg-dark-light p-3">
-                        <div class="col-12 row py-3 align-items-center">
-                            <h1 class="col-6">Editing: {{ $product->name }}</h1><a class="btn btn-primary offset-4 col-auto back" href="{{route('admin.products.index')}}" title="Go back to Products"><i class="fa-solid fa-rotate-left"></i></a>
-                        </div>
-                        <hr>
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Product Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{old('name', $product->name)}}">
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="price" class="form-label">Price</label>
-                                <input type="number" step="0.01" min="0" max="99,99" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{old('price', $product->price)}}">
-                                @error('price')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="discount" class="form-label">Discount</label>
-                                <input type="number" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount" placeholder="0" value="{{old('discount', $product->discount)}}">
-                                @error('discount')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="ingredients" class="form-label">Ingredients</label>
-                                <input type="text" class="form-control @error('ingredients') is-invalid @enderror" id="ingredients" name="ingredients" value="{{old('ingredients', $product->ingredients)}}">
-                                @error('ingredients')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="available" class="form-label">Available</label>
-                                <input id="available-yes" type="radio" name="available" value="1" {{old('available', $product->available) == 1 ? 'checked' : ''}}>
-                                <label for="available-yes" class="text-capitalize">yes</label>
-                                <input id="available-no" type="radio" name="available" value="0" {{old('available', $product->available) == 0 ? 'checked' : ''}}>
-                                <label for="available-no" class="text-capitalize">no</label>
-                                @error('available')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                
-                            <div class="mb-3">
-                                <img id="uploadPreview" width="100" src="{{ $product->image_url ? asset('storage/'.old('image_url', $product->image_url)) : 'https://via.placeholder.com/300x200'}}">
-                                <label for="image_url" class="form-label">Image</label>
-                
-                                <input type="file" name="image_url" id="input_file_img" class="form-control mt-3 @error('image_url') is-invalid @enderror" >
-                                @error('image_url')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="text-start">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="reset" class="btn btn-secondary">Reset</button>
-                
-                        </div>
+    <section id="editProduct">
+        <form action="{{ route('admin.products.update', $product->slug) }}" method="POST" enctype="multipart/form-data" >
+        @csrf
+        @method('PUT')
+            <div class="row bg-dark-light p-3">
+                <div class="col-12 row py-3 align-items-center">
+                    <h1 class="col-6">Editing: {{ $product->name }}</h1><a class="btn btn-primary offset-4 col-auto back" href="{{route('admin.products.index')}}" title="Go back to Products"><i class="fa-solid fa-rotate-left"></i></a>
+                </div>
+                <hr>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Product Name<sup title="This field is required">*</sup></label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{old('name', $product->name)}}" oninvalid="this.setCustomValidity('This field is required')" required >
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                
-                </form>
-            </section>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price<sup title="This field is required">*</sup></label>
+                        <input type="number" step="0.01" min="0" max="99,99" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{old('price', $product->price)}}" oninvalid="this.setCustomValidity('This field is required')" required  >
+                        @error('price')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="discount" class="form-label">Discount<sup title="This field is required">*</sup></label>
+                        <input type="number" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount" placeholder="0" value="{{old('discount', $product->discount)}}" oninvalid="this.setCustomValidity('This field is required')" required   >
+                        @error('discount')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="ingredients" class="form-label">Ingredients<sup title="This field is required">*</sup></label>
+                        <input type="text" class="form-control @error('ingredients') is-invalid @enderror" id="ingredients" name="ingredients" value="{{old('ingredients', $product->ingredients)}}" oninvalid="this.setCustomValidity('This field is required')" required  >
+                        @error('ingredients')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="available" class="form-label">Available<sup title="This field is required">*</sup></label>
+                        <input id="available-yes" type="radio" name="available" value="1" {{old('available', $product->available) == 1 ? 'checked' : ''}}>
+                        <label for="available-yes" class="text-capitalize">yes</label>
+                        <input id="available-no" type="radio" name="available" value="0" {{old('available', $product->available) == 0 ? 'checked' : ''}}>
+                        <label for="available-no" class="text-capitalize">no</label>
+                        @error('available')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+        
+                    <div class="mb-3">
+                        <div for="image_url" class="form-label">Image<sup title="This field is required">*</sup></div>
+                        <img id="uploadPreview" width="100" src="{{ $product->image_url ? asset('storage/'.old('image_url', $product->image_url)) : 'https://via.placeholder.com/300x200'}}">
+        
+                        <input type="file" name="image_url" id="input_file_img" class="form-control mt-3 @error('image_url') is-invalid @enderror" >
+                        @error('image_url')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="text-start">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+        
+                </div>
+            </div>
+        
+        </form>
+    </section>
 
 @endsection
