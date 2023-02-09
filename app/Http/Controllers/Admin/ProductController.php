@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -108,25 +109,34 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
 
+        // dd(Auth::user()->restaurant->id);
 
-        $restaurantId = Auth::id();
+        if (Auth::user()->restaurant->id) {
+
+            $restaurantId = Auth::user()->restaurant->id;
+
+            $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
+
+            if ($tempProd) {
+
+                $product = $tempProd;
+
+                return view('admin.products.edit', compact('product'));
+
+            } else {
+
+                return abort(404);
+            }
+        } else {
+            $types = Type::all();
+            return redirect()->route('admin.restaurants.create', compact('types'));
+        }
 
         //selezioniamo con una query il giusto prodotto associato a un determinato ristorante
-        $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();
 
         //possiamo controllare con un dd()
         // dd($tempProd);
 
-        if ($tempProd) {
-
-            $product = $tempProd;
-
-            return view('admin.products.edit', compact('product'));
-
-        } else {
-
-            return abort(404);
-        }
 
     }
 
@@ -175,7 +185,7 @@ class ProductController extends Controller
 
         } else {
 
-            return abort(404);
+            return abort(403);
 
         }
     }
@@ -203,7 +213,7 @@ class ProductController extends Controller
 
         } else {
 
-            return abort(404);
+            return abort(403);
         }
     }
 }

@@ -33,6 +33,7 @@ class RestaurantController extends Controller
     {
 
         //accorciato codice
+        //
         if (Auth::user()->restaurant) {
             return redirect()->route('admin.dashboard');
         }
@@ -49,7 +50,7 @@ class RestaurantController extends Controller
     public function store(StoreRestaurantRequest $request)
     {
 
-
+        //
         $newRestaurant = new Restaurant();
         $newRestaurant->name = $request->name;
         $newRestaurant->slug = Str::slug($request->name);
