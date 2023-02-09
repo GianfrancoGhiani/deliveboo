@@ -15,7 +15,7 @@
                         <div>Phone: {{$order->customer_tel}} </div>
                         <div>Address: {{$order->customer_address}} </div>
                         <div>Total Price: ${{$order->price}} </div>
-                        <div>Status: <span>{!! $order->paid ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-x"></i>'!!}</span> </div>
+                        <div>Status: <span>{{ $order->paid ? 'Completed' : 'Failed'}}</span> </div>
                         <div>Description: {{$order->description}} </div>
                     </div>
                     <hr>

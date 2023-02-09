@@ -70,7 +70,7 @@ class RestaurantController extends Controller
         if ($request->has('types')) {
             $newRestaurant->types()->attach($request->types);
         }
-        return view('admin.dashboard');
+        return redirect()->route('admin.dashboard');
     }
 
 
