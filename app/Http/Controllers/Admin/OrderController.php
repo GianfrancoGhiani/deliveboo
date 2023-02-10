@@ -25,9 +25,9 @@ class OrderController extends Controller
         $dateOrder = $request->input('dateOrder');
         $orders = Order::where('restaurant_id', Auth::user()->restaurant->id)
             ->when($dateOrder, function ($query, $dateOrder) {
-                $query->orderby('created_at', $dateOrder);
+                $query->orderby('updated_at', $dateOrder);
             }, function ($query) {
-                $query->orderby('created_at', 'desc');
+                $query->orderby('updated_at', 'desc');
             })
             ->get();
         if ($orders) {
