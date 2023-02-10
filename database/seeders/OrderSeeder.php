@@ -30,7 +30,7 @@ class OrderSeeder extends Seeder
             $neworder->price = $faker->randomFloat(2, 50, 500);
             $neworder->paid = $faker->numberBetween(0, 1);
             $neworder->description = $faker->text();
-            $neworder->restaurant_id = 2;
+            $neworder->restaurant_id = 1;
             $neworder->save();
             $neworder->products()->attach([1, 4, 7, 10]);
             // $neworder->products()->attach([30, 31, 32, 33]);
