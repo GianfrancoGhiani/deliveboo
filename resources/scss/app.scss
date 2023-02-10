@@ -81,6 +81,7 @@ $fa-font-path: "./webfonts" !default;
             }
         }
         main{
+            margin-top: 3.5rem;
             height: calc(100vh - 3rem);
             overflow-y: auto;
         }
@@ -102,7 +103,7 @@ $fa-font-path: "./webfonts" !default;
         background: linear-gradient(180deg, #8D4408 0%, rgba(170, 87, 19, 0.78) 59.82%, rgba(252, 128, 25, 0) 99.48%), linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, rgba(230, 183, 143, 0.74) 35.94%, #FC8019 100%);
         color: $white-txt;
         flex-shrink: 0;
-
+        width: 250px;
         a{
             color: $white-txt;
             border-radius: 2rem 0 0 2rem;
@@ -116,6 +117,7 @@ $fa-font-path: "./webfonts" !default;
             }
         }
     }
+    
 }
 
 
@@ -141,9 +143,7 @@ $fa-font-path: "./webfonts" !default;
             font-style: italic;
         }
     }
-    .card-body{
 
-    }
     .dashboard-list{
     list-style: none;
 
@@ -187,12 +187,43 @@ $fa-font-path: "./webfonts" !default;
 }
 
 //header
-#main-navbar{
-    // position: relative;
-    a, i{
-        color: $my-secondary;
+#header{
+   position: fixed;
+   top: 0;
+   width: calc(100% - 250px);
+   height: 3rem;
+   z-index: 3000;
+   border-bottom: 1px solid $bg-youtube-light;
+   .dropdown-toggle{
+        color: $white-txt;
         text-decoration: none;
-    }
+        i{
+            color: $my-main;
+        }
+        div::first-letter{
+            font-weight: 600;
+            color: $my-main;
+        }
+   }
+   .navbar-nav{
+        li{
+            & a:hover{
+                color: $my-main;
+            }
+        }
+   }
+   .bg-dark-light{
+        a.dropdown-item{
+            color: $white-txt;
+            border-bottom: 1px solid transparent;
+
+            &:hover{
+                background-color: lighten($color: $bg-youtube-light, $amount: 5);
+                border-bottom: 1px dotted $white-txt;
+            }
+        }
+   }
+   
 }
 
 #indexProduct{
@@ -230,6 +261,19 @@ $fa-font-path: "./webfonts" !default;
         &:hover{
             border: 1px solid $my-dark;
         }
+    }
+    h2{
+        &::first-letter{
+            color: $my-main;
+        }
+    }
+    .subtitle{
+        font-weight: 500;
+    }
+    .important{
+        color: lighten($color: $my-main, $amount: 20);
+        font-weight: 600;
+        font-style: italic;
     }
 }
 
@@ -281,5 +325,23 @@ $fa-font-path: "./webfonts" !default;
         line-height: 2rem ;
         height: 2rem;
         }
+    }
+    img{
+        
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 800px){
+    #admin{
+        #sidebarMenu {
+        width: 175px;
+        a{
+            margin-left: 0;
+        }
+        .fa-solid{
+            display: none;
+        }
+      }
     }
 }

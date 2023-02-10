@@ -1,64 +1,28 @@
-<header>
-    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-dark-mode">
-        <!-- Container wrapper -->
-        <div class="container-fluid">
-          <!-- Toggle button -->
-            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
+<header id="header" class="container-md-fluid">
+    <nav class="navbar navbar-expand navbar-dark bg-dark align-items-center">
+        <div class="collapse navbar-collapse justify-content-end align-items-center pe-5" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown me-3">
+                <a class="dropdown-toggle text-capitalize d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <i class="fa-brands fa-github me-2"></i>
+                <div>{{ Auth::user()->name }}</div>
+                </a>
+
+                <div class="dropdown-menu bg-dark-light" aria-labelledby="dropdownMenu2">
+                    <a class="dropdown-item" href="{{ url('admin') }}">Dashboard</a>
+                    <a class="dropdown-item" href="{{ url('admin/products') }}">Products</a>
+                    <a class="dropdown-item" href="{{ url('admin/orders') }}">Orders</a>
+
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">Logout</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+                </form>
+            </li>
+          </ul>
         </div>
-
-        <!-- Right links -->
-        <ul class="navbar-nav ms-auto d-flex flex-row bg-dark-mode">
-            <div id="main-menu text-end dropdown-menu-left">
-                <nav class="navbar-nav container bg-dark-mode nav-dashboard">
-                    <ul class="navbar-nav pull-right bg-dark-mode">
-                        <li class="nav-item dropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <img src="{{url('/logo-out-icon-white.png')}}"  height="22" alt="Avatar" /> {{ __('Logout') }}
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </ul>
-
-        {{-- <div class="nav-item dropdown">
-            <a class="nav-link me-3 me-lg-0" href="#" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-bell"></i>
-            <span class="badge rounded-pill badge-notification bg-danger">1</span>
-            </a>
-
-        </div> --}}
-
-        <!-- Notification dropdown -->
-
-        <div id="main-menu text-end dropdown-menu-left">
-            <nav class="navbar-nav container navbar-dark nav-dashboard">
-                <ul class="navbar-nav pull-right">
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle text-capitalize" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <img src="{{url('/github-avatar-white.png')}}" class="rounded-circle" height="22" alt="Avatar" />
-                        {{ Auth::user()->name }}
-                        </a>
-
-                        <div class="dropdown-menu " aria-labelledby="dropdownMenu2">
-                            <a class="dropdown-item" href="{{ url('admin') }}">{{__('Dashboard')}}</a>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                {{ __('Effettua il logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </nav>    
+      </nav>
 </header>

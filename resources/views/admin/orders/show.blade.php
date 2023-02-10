@@ -1,32 +1,30 @@
 @extends('layouts.admin')
 
 @section('content')
-    <section  id="showOrder">
-        <div class="container-fluid my-5">
-            <div class="row ">
-                <div class="col-8 offset-2 bg-dark-light p-3">
-                    <h1 class="mb-2">{{$order->name}}</h1>
+    <section  id="showOrder"  class="container-fluid">
+        {{-- <div class="my-5"> --}}
+            <div class="row justify-content-sm-center justify-content-md-start my-5">
+                <div class="col-lg-8 col-sm-12 col-md-10 offset-lg-2 offset-md-1 bg-dark-light card p-sm-2 p-md-4 flex-row row ">
                     <div class="mb-2">
-            
                         <div>
-                            <h3>Customer Data</h3>
-                            <div>Date: {{explode(" ",$order->created_at)[0]}} </div>
-                            <div>Time: {{explode(" ",$order->created_at)[1]}} </div>
-                            <div>Name: {{$order->customer_firstname}} </div>
-                            <div>Surname: {{$order->customer_lastname}} </div>
-                            <div>Email: {{$order->customer_email}} </div>
-                            <div>Phone: {{$order->customer_tel}} </div>
-                            <div>Address: {{$order->customer_address}} </div>
-                            <div>Total Price: ${{$order->price}} </div>
-                            <div>Status: <span>{{ $order->paid ? 'Completed' : 'Failed'}}</span> </div>
-                            <div>Description: {{$order->description}} </div>
+                            <h2>Customer Data</h2>
+                            <div><span  class="subtitle" >Date: </span><span class="important">{{date('F d, Y', strtotime($order->updated_at)) }}</span> </div>
+                            <div><span  class="subtitle" >Time:</span> {{date('h:i A', strtotime($order->updated_at)) }} </div>
+                            <div><span  class="subtitle" >Name:</span> <span>{{$order->customer_firstname}}</span> </div>
+                            <div><span  class="subtitle" >Surname:</span> {{$order->customer_lastname}} </div>
+                            <div><span  class="subtitle" >Email:</span> <span class="important">{{$order->customer_email}}</span> </div>
+                            <div><span  class="subtitle" >Phone:</span> <span class="important">{{$order->customer_tel}}</span> </div>
+                            <div><span  class="subtitle" >Address:</span> {{$order->customer_address}} </div>
+                            <div><span  class="subtitle" >Total Price:</span> ${{$order->price}} </div>
+                            <div><span  class="subtitle" >Status:</span> <span class="important">{{ $order->paid ? 'Completed' : 'Failed'}}</span> </div>
+                            <div><span  class="subtitle" >Description:</span> {{$order->description}} </div>
                         </div>
                         <hr>
                         <div>
-                            <h3>Product List:</h3>
+                            <h2>Product List:</h2>
             
                             @foreach ($order->products as $key=>$value)
-                                <div>Product {{$key + 1}}: {{$value->name}} quantity: {{$value->pivot->quantity}}</div>
+                                <div class="subtitle">Product Num {{$key + 1}} x {{$value->pivot->quantity}}: <span class="important">{{$value->name}}</span> </div>
                             @endforeach
                         </div>
                         <hr>
@@ -39,7 +37,7 @@
             
             
             </div>
-        </div>
+        {{-- </div> --}}
         
     </section>
 @endsection

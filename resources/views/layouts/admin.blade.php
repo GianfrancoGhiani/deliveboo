@@ -28,7 +28,7 @@
     <div id="wrapper">
         @include('partials.admin.header')
 
-        <main class="pt-4 container-fluid">
+        <main class="">
             @yield('content')
         </main>
     </div>
