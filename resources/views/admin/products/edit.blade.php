@@ -73,6 +73,38 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <button type="reset" class="btn btn-secondary">Reset</button>
                     </div>
+                    <div class="mb-3">
+                        <label for="ingredients" class="form-label">Ingredients<sup title="This field is required">*</sup></label>
+                        <input type="text" class="form-control @error('ingredients') is-invalid @enderror" id="ingredients" name="ingredients" value="{{old('ingredients', $product->ingredients)}}" oninvalid="this.setCustomValidity('This field is required')" required  >
+                        @error('ingredients')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="available" class="form-label">Available<sup title="This field is required">*</sup></label>
+                        <input id="available-yes" type="radio" name="available" value="1" {{old('available', $product->available) == 1 ? 'checked' : ''}}>
+                        <label for="available-yes" class="text-capitalize">yes</label>
+                        <input id="available-no" type="radio" name="available" value="0" {{old('available', $product->available) == 0 ? 'checked' : ''}}>
+                        <label for="available-no" class="text-capitalize">no</label>
+                        @error('available')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+        
+                    <div class="mb-3">
+                        <div for="image_url" class="form-label">Image<sup title="This field is required">*</sup></div>
+                        <img id="uploadPreview" width="100" data-image="{{$product->image_url}}" src="{{ $product->image_url ? asset('storage/'.old('image_url', $product->image_url)) : 'https://via.placeholder.com/300x200'}}">
+        
+                        <input type="file" name="image_url" id="input_file_img" class="form-control mt-3 @error('image_url') is-invalid @enderror" >
+                        @error('image_url')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="text-start">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button id="reset_button" type="reset" class="btn btn-secondary">Reset</button>
+        
                 </div>
             </div>
         

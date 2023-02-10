@@ -52,6 +52,23 @@ previewImage.addEventListener('change', (event) =>{
     };
 });
 
+document.getElementById('reset_button').addEventListener('click', (event) => {
+    const inputFile = document.getElementById('input_file_img');
+    inputFile.value = '';
+    
+    const preview = document.getElementById("uploadPreview");
+    const dataImage = preview.dataset.image;
+    if(dataImage){
+        console.log(dataImage);
+        preview.src = '/storage/' + dataImage;
+
+    }else{
+        preview.src = "https://via.placeholder.com/300x200";
+    }
+
+  });
+
+
 //questo non so cosè
 // $("#menu-toggle").click(function(e) {
 //     e.preventDefault();
