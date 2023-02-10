@@ -55,7 +55,7 @@ class RestaurantController extends Controller
     public function show($restaurantId, $restaurantslug)
     {
 
-        $products = Product::where('restaurant_id', $restaurantId)->where('slug', $restaurantslug)->get();
+        $products = Product::where('restaurant_id', $restaurantId)->get();
         return response()->json([
             'success' => true,
             'results' => $products
