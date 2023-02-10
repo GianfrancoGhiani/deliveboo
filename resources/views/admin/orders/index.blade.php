@@ -16,6 +16,17 @@
             <h1 class="">Orders</h1>
         </div>
         <div class="card-body">
+            <form action="{{ route('admin.orders.index') }}" method="GET" class="d-flex">
+                <h4>Choose the date: </h4>
+                <div class="ms-5">
+                    <input class="rounded-2" type="date" name="dateSelect" id="dateSelect" value="{{date("Y-m-d")}}">
+                    <button type="submit" class="btn btn-outline-light rounded-2">Find</button>
+                    <a href="{{route('admin.orders.index')}}" class="rounded-2 btn  btn-outline-light">
+                        <i class="fa-solid fa-xmark"></i>
+                    </a>
+                </div>
+            </form>
+          
             <table class="table bg-dark-light">
                 <thead>
                 <tr class="text-center">
@@ -39,7 +50,7 @@
                     <th scope="col" class="text-capitalize">firstname</th>
                     <th scope="col" class="text-capitalize">lastname</th>
                     <th scope="col" class="text-capitalize">email</th>
-                    <th scope="col" class="text-capitalize">paid</th>
+                    <th scope="col" class="text-capitalize text-center">paid</th>
                     <th scope="col" class="text-capitalize" class="text-center ">tel</th>
                     <th scope="col" class="text-capitalize">price</th>
                     <th scope="col" class="text-capitalize">description</th>
@@ -73,7 +84,7 @@
                                 {{-- <img src="{{asset('storage/' . $product->image_url)}}" alt="" class="w-100"> --}}
                             </td>
                             {{-- paid --}}
-                            <td class="text-center ">
+                            <td style="width: 10rem" class="text-center ">
                                 {{$order->paid ? 'paid' : 'not paid'}}
                             </td>
                             {{-- price --}}
@@ -85,14 +96,9 @@
                                 {{$order->price}}
                                 {{-- <a class="btn btn-info" href="{{route('admin.products.edit', $product->slug)}}" title="Edit Product"><i class="fa-solid fa-pen-ruler"></i></a> --}}
                             </td>
-                            {{-- delete --}}
-                            <td>
-                                {{$order->description}}
-                                {{-- <form action="{{route('admin.products.destroy', $product->slug)}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="delete-button btn btn-danger" data-item-title="{{$product->name}}"><i class="fa-solid fa-trash-can"></i></button>
-                                </form> --}}
+                            {{-- descrizione tagliata a 50 caratteri --}}
+                            <td style="width: 25rem">
+                                {{(strlen($order->description) > 13) ? substr($order->description,0,50).'...' : $order->description;}}
                             </td>
                             </a>
                         </tr>

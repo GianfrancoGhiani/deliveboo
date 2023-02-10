@@ -23,15 +23,19 @@ class OrderController extends Controller
         //
         // dd(Order::all());
         $dateOrder = $request->input('dateOrder');
+        $dateSelect = $request->input('dateSelect');
+        // dd($dateSelect);
         $orders = Order::where('restaurant_id', Auth::user()->restaurant->id)
             ->when($dateOrder, function ($query, $dateOrder) {
                 $query->orderby('updated_at', $dateOrder);
             }, function ($query) {
                 $query->orderby('updated_at', 'desc');
             })
+            ->when($dateSelect, function ($query, $dateSelect) {
+                $query->whereDate('updated_at', $dateSelect);
+            })
             ->get();
         if ($orders) {
-
             return view('admin.orders.index', compact('orders'));
         }
         return view('admin.products.index');

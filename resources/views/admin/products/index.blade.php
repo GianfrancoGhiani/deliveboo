@@ -47,7 +47,7 @@
                             <td class="text-center">€ {{$product?->price}}</td>
                             {{-- edit --}}
                             <td>
-                                <a class="btn btn-secondary text-center" href="{{route('admin.products.edit', $product->slug)}}" title="Edit Product"><i class="fa-solid fa-pen-ruler"></i></a>
+                                <a class="btn btn-primary text-center" href="{{route('admin.products.edit', $product->slug)}}" title="Edit Product"><i class="fa-solid fa-pen-ruler"></i></a>
                             </td>
                             {{-- delete --}}
                             <td>

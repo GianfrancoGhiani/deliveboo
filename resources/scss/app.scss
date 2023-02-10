@@ -3,6 +3,7 @@
 $fa-font-path: "./webfonts" !default;
 @import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
 @import '@fortawesome/fontawesome-free/scss/solid.scss';
+@import '@fortawesome/fontawesome-free/scss/regular.scss';
 @import '@fortawesome/fontawesome-free/scss/brands.scss';
 
 // $theme-color: (
@@ -231,7 +232,7 @@ $fa-font-path: "./webfonts" !default;
         th{
             font-size: 1.2rem;
             &::first-letter{
-                color: $my-secondary;
+                color: $my-main;
             }
         }
     }
@@ -251,7 +252,15 @@ $fa-font-path: "./webfonts" !default;
             border-color: $my-main;
         }
     }
-
+    form{
+        button,i {
+            color: $white-txt;
+            font-weight: 700;
+        }
+        button.btn-outline-light:hover, .btn-outline-light:hover i{
+            color: $my-dark;
+        }
+    }
 }
 #showOrder{
     a{
