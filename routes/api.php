@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
