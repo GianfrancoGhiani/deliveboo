@@ -52,9 +52,10 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($restaurantId)
+    public function show($restaurantId, $restaurantslug)
     {
-        $products = Product::where('restaurant_id', $restaurantId)->get();
+
+        $products = Product::where('restaurant_id', $restaurantId)->where('slug', $restaurantslug)->get();
         return response()->json([
             'success' => true,
             'results' => $products

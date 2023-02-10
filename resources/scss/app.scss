@@ -70,7 +70,7 @@ $fa-font-path: "./webfonts" !default;
     display: flex;
 
     #wrapper {
-        width: 100%;
+        width: calc(100% - 250px);
         height: 100vh;
         overflow-y: hidden;
         header {
@@ -343,5 +343,7 @@ $fa-font-path: "./webfonts" !default;
             display: none;
         }
       }
+      #wrapper {
+        width: calc(100% - 175px);
     }
 }
