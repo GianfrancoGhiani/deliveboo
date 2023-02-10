@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class StoreProductRequest extends FormRequest
 {
@@ -24,12 +26,12 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => ['required',Rule::unique('products')->where('restaurant_id' , Auth::user()->restaurant->id)->ignore($this->product)],
             'price' => 'required|numeric|between:0,99.99',
             'available' => 'required',
             'discount' => 'nullable|numeric|between:0,90.00',
             'ingredients' => 'required',
-            'image_url' => 'image'
+            'image_url' => 'image|required'
         ];
     }
     public function messages()
@@ -42,6 +44,7 @@ class StoreProductRequest extends FormRequest
             'dicount.between'=> 'The discount must be between 0 and 90.00',
             'ingredients.required' => 'The field is required',
             'image_url.image' => 'The field must contain an image',
+            'image_url.required' => 'The image fieald is required',
 
         ];
     }

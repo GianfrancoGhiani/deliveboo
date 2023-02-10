@@ -73,9 +73,9 @@ class ProductController extends Controller
             }
 
             //controlliamo se il nome del nuovo prodotto è già presente nel suo ristorante, se è vero lo rimandiamo indietro con un messaggio di errore 
-            if (count(Product::where('restaurant_id', Auth::user()->restaurant->id)->where('name', $newproduct->name)->get())) {
-                return back()->with('message', 'This name is taken!');
-            }
+            // if (count(Product::where('restaurant_id', Auth::user()->restaurant->id)->where('name', $newproduct->name)->get())) {
+            //     return back()->with('message', 'This name is taken!');
+            // }
 
             $newproduct->save();
 
@@ -168,9 +168,9 @@ class ProductController extends Controller
             $restaurantId = Auth::user()->restaurant->id;
 
             //controllo che il nome del prodotto modificato non sia già presente nel db del ristorante
-            if (count(Product::where('restaurant_id', $restaurantId)->where('name', $request->name)->get())) {
-                return back()->with('message', 'name is taken!');
-            }
+            // if (count(Product::where('restaurant_id', $restaurantId)->where('name', $request->name)->get())) {
+            //     return back()->with('message', 'name is taken!');
+            // }
 
             //creo una query per selezionare il giusto prodotto associato al ristorante 
             $tempProd = Product::where('slug', $product->slug)->where('restaurant_id', $restaurantId)->first();

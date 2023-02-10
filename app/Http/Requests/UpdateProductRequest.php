@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => ['required',Rule::unique('products')->where('restaurant_id' , Auth::user()->restaurant->id)->ignore($this->product)],
             'price' => 'required|numeric|between:0,99.99',
             'available' => 'required',
             'discount' => 'nullable|numeric|between:0,90',
