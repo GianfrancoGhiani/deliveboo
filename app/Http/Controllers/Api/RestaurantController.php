@@ -17,11 +17,11 @@ class RestaurantController extends Controller
      */
     public function index(Request $request)
     {
-        $reqTypes = $request->input('types');
+        $reqTypes = $request->query('types');
         $types = Type::all();
 
         $restaurants = Restaurant::with('types')
-            ->when($reqTypes, function ($query, $reqTypes) {
+            ->when(!empty($reqTypes), function ($query, $reqTypes) {
                 $query->whereHas('types', function ($q) use ($reqTypes) {
                     $q->where('id', $reqTypes);
                 });
