@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\RestaurantController;
-use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +25,6 @@ Route::get('restaurants', [RestaurantController::class, 'index']);
 Route::get('restaurant/{id}/{slug}', [RestaurantController::class, 'show']);
 
 
-//ordering path
+//ordering routes
+Route::get('order', [OrderController::class, 'generate']);
+Route::post('order/payment', [OrderController::class, 'makePayment']);
