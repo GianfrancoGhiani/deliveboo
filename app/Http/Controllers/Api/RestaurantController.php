@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Restaurant;
-
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
@@ -15,13 +15,25 @@ class RestaurantController extends Controller
      *
      * 
      */
-    public function index()
+    public function index(Request $request)
     {
-        $restaurants = Restaurant::with('types')->get();
+        $reqTypes = $request->input('types');
+        $types = Type::all();
+
+        $restaurants = Restaurant::with('types')
+            ->when($reqTypes, function ($query, $reqTypes) {
+                $query->whereHas('types', function ($q) use ($reqTypes) {
+                    $q->where('id', $reqTypes);
+                });
+            })
+            ->get();
 
         return response()->json([
             'success' => true,
-            'results' => $restaurants
+            'results' => [
+                'restaurants' => $restaurants,
+                'types' => $types
+            ]
         ]);
     }
 

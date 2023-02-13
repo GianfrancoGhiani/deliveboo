@@ -26,5 +26,4 @@ Route::get('restaurants', [RestaurantController::class, 'index']);
 Route::get('restaurant/{id}/{slug}', [RestaurantController::class, 'show']);
 
 
-
-Route::post('/order', [OrderController::class, 'store']);
+//ordering path
