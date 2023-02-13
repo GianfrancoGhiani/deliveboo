@@ -20,19 +20,19 @@ class RestaurantController extends Controller
         $reqTypes = $request->query('types');
         $types = Type::all();
 
-        $restaurants = Restaurant::with('types')
-            ->when(!empty($reqTypes), function ($query, $reqTypes) {
+        $restaurants = Restaurant::when(!empty($reqTypes), function ($query) use($reqTypes) {
                 $query->whereHas('types', function ($q) use ($reqTypes) {
-                    $q->where('id', $reqTypes);
+                    $q->where('type_id', $reqTypes);
                 });
-            })
+            })->with('types')
             ->get();
 
         return response()->json([
             'success' => true,
             'results' => [
                 'restaurants' => $restaurants,
-                'types' => $types
+                'types' => $types,
+                'reqTypes' => $reqTypes,
             ]
         ]);
     }
