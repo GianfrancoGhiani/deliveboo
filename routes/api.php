@@ -24,6 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('restaurants', [RestaurantController::class, 'index']);
 Route::get('restaurant/{id}/{slug}', [RestaurantController::class, 'show']);
 
+//get single product
+Route::get('product', [RestaurantController::class, 'singleproduct']);
+
+
+
 
 //ordering routes
 Route::get('order', [OrderController::class, 'generate']);

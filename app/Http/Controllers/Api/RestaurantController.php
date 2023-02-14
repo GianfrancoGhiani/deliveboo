@@ -20,11 +20,11 @@ class RestaurantController extends Controller
         $reqTypes = $request->query('types');
         $types = Type::all();
 
-        $restaurants = Restaurant::when(!empty($reqTypes), function ($query) use($reqTypes) {
-                $query->whereHas('types', function ($q) use ($reqTypes) {
-                    $q->where('type_id', $reqTypes);
-                });
-            })->with('types')
+        $restaurants = Restaurant::when(!empty($reqTypes), function ($query) use ($reqTypes) {
+            $query->whereHas('types', function ($q) use ($reqTypes) {
+                $q->where('type_id', $reqTypes);
+            });
+        })->with('types')
             ->get();
 
         return response()->json([
@@ -42,9 +42,13 @@ class RestaurantController extends Controller
      *
      * 
      */
-    public function create()
+    public function singleproduct($product_id, $product_Slug)
     {
-        //
+        $product = Product::where('id', $product_id)->first();
+        return response()->json([
+            'success' => true,
+            'results' => $product
+        ]);
     }
 
     /**
