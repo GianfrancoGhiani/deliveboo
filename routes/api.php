@@ -25,7 +25,7 @@ Route::get('restaurants', [RestaurantController::class, 'index']);
 Route::get('restaurant/{id}/{slug}', [RestaurantController::class, 'show']);
 
 //get single product
-Route::get('product', [RestaurantController::class, 'singleproduct']);
+Route::get('product/{id}/{slug}', [RestaurantController::class, 'singleproduct']);
 
 
 
