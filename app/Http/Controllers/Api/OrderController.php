@@ -25,14 +25,15 @@ class OrderController extends Controller
     public function makePayment(OrderRequest $request, Gateway $gateway)
     {
         $amount = OrderController::totalPrice($request->products);
-        //dd($amount);
+
         $result = $gateway->transaction()->sale([
-            'amount' =>  $amount,
+            'amount' =>  intval($amount),
             'paymentMethodNonce' => $request->token,
             'options' => [
                 'submitForSettlement' => true
             ]
         ]);
+        // dd($result);
         if ($result->success) {
             $data = [
                 'success' => true,
@@ -54,7 +55,11 @@ class OrderController extends Controller
         foreach ($productsIdsArray as $product_id) {
             $product = Product::find($product_id);
             $discount = $product->discount;
-            $totalPrice += ($product->price - (($product->price / 100) * $discount));
+            if ($discount) {
+                $totalPrice += ($product->price - (($product->price / 100) * $discount));
+            } else {
+                $totalPrice += $product->price;
+            }
         }
         return $totalPrice;
     }
