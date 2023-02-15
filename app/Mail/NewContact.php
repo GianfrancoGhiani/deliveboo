@@ -34,7 +34,7 @@ class NewContact extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'New Contact',
+            subject: 'New Deliveboo Order',
         );
     }
 
