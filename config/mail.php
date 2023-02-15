@@ -1,5 +1,33 @@
 <?php
 
+// return [
+//     'driver' => env('MAIL_MAILER', 'smtp'),
+//     'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+//     'port' => env('MAIL_PORT', 587),
+//     'from' => [
+//         'address' => env('MAIL_FROM_ADDRESS', 'deliveboo.2023@gmail.com'),
+//         'name' => env('MAIL_USERNAME', 'DeliveBoo'),
+//     ],
+//     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+//     'username' => env('MAIL_USERNAME', 'deliveboo.2023@gmail.com'),
+//     'password' => env('MAIL_PASSWORD', 'DeliveBoo.2023'),
+//     'sendmail' => '/usr/sbin/sendmail -bs',
+//     'markdown' => [
+//         'theme' => 'default',
+//         'paths' => [
+//             resource_path('views/vendor/mail'),
+//         ],
+//     ],
+//     'stream' => [
+//         'ssl' => [
+//             'allow_self_signed' => true,
+//             'verify_peer' => false,
+//             'verify_peer_name' => false,
+//         ],
+//     ],
+// ];
+
+
 return [
 
     /*
@@ -14,6 +42,7 @@ return [
     */
 
     'default' => env('MAIL_MAILER', 'smtp'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -34,16 +63,29 @@ return [
     */
 
     'mailers' => [
+
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+            'host' => env('MAIL_HOST', 'smtp.googlemail.com'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN'),
+            'auth_mode' => null,
         ],
+
+
+        // 'smtp' => [
+        //     'transport' => 'smtp',
+        //     'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+        //     'port' => env('MAIL_PORT', 587),
+        //     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+        //     'username' => env('MAIL_USERNAME'),
+        //     'password' => env('MAIL_PASSWORD'),
+        //     'timeout' => null,
+        //     'local_domain' => env('MAIL_EHLO_DOMAIN'),
+        // ],
 
         'ses' => [
             'transport' => 'ses',

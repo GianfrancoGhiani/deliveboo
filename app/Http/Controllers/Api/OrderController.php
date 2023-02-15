@@ -8,6 +8,10 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Braintree\Gateway;
+use App\Mail\NewContact;
+use App\Models\Restaurant;
+use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 class OrderController extends Controller
 {
@@ -51,6 +55,17 @@ class OrderController extends Controller
 
 
         OrderController::storeOrder($request, $amount, $result->success, $restaurantId, $description);
+        $contact = new NewContact($description);
+        $restaurantOwner = Restaurant::find($restaurantId);
+        $user = User::find($restaurantOwner->user_id);
+
+
+
+        Mail::to($request->customerData['customer_email'])->send($contact);
+        Mail::to($user->email)->send($contact);
+
+
+
         if ($result->success) {
             $data = [
                 'success' => true,
