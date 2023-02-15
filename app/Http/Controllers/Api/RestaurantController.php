@@ -24,7 +24,7 @@ class RestaurantController extends Controller
             $query->whereHas(
                 'types',
                 function ($q) use ($reqTypes) {
-                    $q->where('type_id', $reqTypes);
+                    $q->whereIn('type_id', $reqTypes);
                 }
             );
         })->with('types')
