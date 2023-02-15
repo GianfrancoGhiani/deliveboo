@@ -8,13 +8,15 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Braintree\Gateway;
+use App\Mail\NewContact;
+use App\Models\Restaurant;
+use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 class OrderController extends Controller
 {
     public function generate(Request $request, Gateway $gateway)
     {
-        // dd($gateway);
-
         $token = $gateway->clientToken()->generate();
         $data = [
             'success' => true,
@@ -24,7 +26,7 @@ class OrderController extends Controller
     }
     public function makePayment(OrderRequest $request, Gateway $gateway)
     {
-        // dd($request);
+
         $amount = OrderController::totalPrice($request->products)['amount'];
 
         $result = $gateway->transaction()->sale([
@@ -35,45 +37,59 @@ class OrderController extends Controller
             ]
         ]);
         $restaurantId = OrderController::totalPrice($request->products)['restaurantId'];
-        // dd($request);
+        $description = '';
+        if ($result->success) {
+            $request->products;
+
+            $description = "Payment done correctly! Thank you " . $request->customerData['customer_firstname'] . "
+            You have ordered: 
+            ";
+            foreach ($request->products as $productData) {
+                $product = Product::where('id', $productData['id'])->first();
+                $description .= $product->name . ", quantity: " . $productData['q'] .  "
+                ";
+            };
+        } else {
+            $description = 'Payment refused!';
+        }
+
+
+        OrderController::storeOrder($request, $amount, $result->success, $restaurantId, $description);
+        $contact = new NewContact($description);
+        $restaurantOwner = Restaurant::find($restaurantId);
+        $user = User::find($restaurantOwner->user_id);
+
+
+
+        Mail::to($request->customerData['customer_email'])->send($contact);
+        Mail::to($user->email)->send($contact);
+
+
+
         if ($result->success) {
             $data = [
                 'success' => true,
                 'message' => 'Payment done correctly!'
             ];
-            // $description =
-            //     " 
-            // {$data['message']} 
-            // Thank you {$request->customerData['customer_firstname']} { $request->customerData['customer_lastname']}.
-            // You have ordered:
-
-
-
-            // -------
-            // Products list
-            // -------
-
-
-            // ";
-
             return response()->json($data);
         } else {
             $data = [
                 'success' => false,
                 'message' => 'Payment refused!'
             ];
-            // $description = $data['message'];
-
             return response()->json($data);
         }
     }
 
     public static function totalPrice($productsIdsQuantityArray)
     {
+
         $totalPrice = 0;
         foreach ($productsIdsQuantityArray as $tempProduct) {
             $prodQuantity = $tempProduct['q'];
             $product = Product::find($tempProduct['id']);
+
+
 
             $restaurantId = $product->restaurant_id;
             $discount = $product->discount;
@@ -89,18 +105,25 @@ class OrderController extends Controller
         ];
     }
 
-    public static function storeOrder($formData, $totalPrice, $paid, $r_id, $descr)
+    public static function storeOrder($request, $totalPrice, $paid, $r_id, $descr)
     {
+        $customerData = $request->customerData;
+        $products = $request->products;
         $neworder = new Order();
-        $neworder->customer_firstname = $formData['customer_firstname'];
-        $neworder->customer_lastname = $formData['customer_lastname'];
-        $neworder->customer_email = $formData['customer_email'];
-        $neworder->customer_address = $formData['customer_address'];
-        $neworder->customer_tel = $formData['customer_tel'];
-        $neworder->price = $formData['$totalPrice'];
-        $neworder->paid = $formData['$paid'];
+        $neworder->customer_firstname = $customerData['customer_firstname'];
+        $neworder->customer_lastname = $customerData['customer_lastname'];
+        $neworder->customer_email = $customerData['customer_email'];
+        $neworder->customer_address = $customerData['customer_address'];
+        $neworder->customer_tel = $customerData['customer_tel'];
+        $neworder->price = $totalPrice;
+        $neworder->paid = $paid;
         $neworder->description = $descr;
         $neworder->restaurant_id = $r_id;
         $neworder->save();
+
+
+        foreach ($products as $product) {
+            $neworder->products()->attach([$product['id'] => ['quantity' => $product['q']]]);
+        }
     }
 }
