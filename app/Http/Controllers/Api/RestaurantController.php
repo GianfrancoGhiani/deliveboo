@@ -21,9 +21,12 @@ class RestaurantController extends Controller
         $types = Type::all();
 
         $restaurants = Restaurant::when(!empty($reqTypes), function ($query) use ($reqTypes) {
-            $query->whereHas('types', function ($q) use ($reqTypes) {
-                $q->where('type_id', $reqTypes);
-            });
+            $query->whereHas(
+                'types',
+                function ($q) use ($reqTypes) {
+                    $q->where('type_id', $reqTypes);
+                }
+            );
         })->with('types')
             ->get();
 
@@ -66,7 +69,6 @@ class RestaurantController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($restaurantId, $restaurantslug)
     {
@@ -75,6 +77,15 @@ class RestaurantController extends Controller
         return response()->json([
             'success' => true,
             'results' => $products
+        ]);
+    }
+
+    public function info($restaurantId)
+    {
+        $restaurant = Restaurant::where('id', $restaurantId)->first();
+        return response()->json([
+            'success' => true,
+            'results' => $restaurant
         ]);
     }
 
