@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //restaurant api routes
 Route::get('restaurants', [RestaurantController::class, 'index']);
 Route::get('restaurant/{id}/{slug}', [RestaurantController::class, 'show']);
+Route::get('restaurant/{id}', [RestaurantController::class, 'info']);
 
 //get single product
 Route::get('product/{id}/{slug}', [RestaurantController::class, 'singleproduct']);
