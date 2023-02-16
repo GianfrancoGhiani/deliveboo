@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NewContact extends Mailable
+class NewMessage extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,13 +18,12 @@ class NewContact extends Mailable
      *
      * @return void
      */
-
-
-    public $body;
-    public function __construct($_body)
+    public $lead;
+    public function __construct($_lead)
     {
-        $this->body = $_body;
+        $this->lead = $_lead;
     }
+
 
     /**
      * Get the message envelope.
@@ -34,7 +33,7 @@ class NewContact extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'New Deliveboo Order',
+            subject: 'New Message',
         );
     }
 
@@ -46,10 +45,7 @@ class NewContact extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.email',
-            with: [
-                'body' => $this->body
-            ],
+            view: 'mail.message',
         );
     }
 

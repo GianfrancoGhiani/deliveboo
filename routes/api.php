@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ChartsController;
 use App\Http\Controllers\Api\RestaurantController;
@@ -30,6 +31,8 @@ Route::get('restaurant/{id}', [RestaurantController::class, 'info']);
 Route::get('product/{id}/{slug}', [RestaurantController::class, 'singleproduct']);
 
 Route::get('charts', [ChartsController::class, 'index']);
+//contact us route
+Route::post('contacts', [LeadController::class, 'store']);
 
 
 //ordering routes
