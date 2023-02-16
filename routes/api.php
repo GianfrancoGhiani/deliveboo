@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\RestaurantController;
 use Illuminate\Http\Request;
@@ -28,7 +29,8 @@ Route::get('restaurant/{id}', [RestaurantController::class, 'info']);
 //get single product
 Route::get('product/{id}/{slug}', [RestaurantController::class, 'singleproduct']);
 
-
+//contact us route
+Route::post('contacts', [LeadController::class, 'store']);
 
 
 //ordering routes
