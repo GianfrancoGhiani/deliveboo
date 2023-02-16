@@ -14,7 +14,17 @@ class ChartsController extends Controller
     public function index(Request $request)
     {
         // dd($request->restaurantId);
-        $orders = Order::where('restaurant_id', $request->restaurantId)->selectRaw('count(*) as total, DATE(created_at) as date')->groupBy(DB::raw("DATE(created_at)"))->get();
+        // return [
+        //     "result" => $request->filter
+        // ];
+        $filter = $request->filter;
+        $orders = Order::where('restaurant_id', $request->restaurantId)->when(
+            $filter,
+            function ($query, $filter) {
+                $query->where('created_at', 'LIKE', $filter . '%');
+            }
+        )
+            ->selectRaw('count(*) as total, DATE(created_at) as date')->groupBy(DB::raw("DATE(created_at)"))->get();
 
         $data = [
             'success' => true,

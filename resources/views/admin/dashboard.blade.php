@@ -41,9 +41,13 @@
     </div> --}}
 </div>
 <div>
-    {{-- <button id="mybtn">invia</button> --}}
+
     <div class="container p-5">
         <div class="row">
+            <div class="row">
+                <input class="col"  type="month" name="filter" id="filter" value="{{date('Y-m')}}">
+                <button id="sendFilter">Send</button>
+            </div>
             <div class="col-12">
 
                 <canvas id="myChart"></canvas>
@@ -56,74 +60,7 @@
 
     </div>
   </div>
-{{-- <script >
-//     import Chart from '../../../node_modules/chart.js/auto';
-        
-//     const mybtn = document.getElementById('mybtn');
 
-//     mybtn.addEventListener('click', () => {
-
-//             axios.get('/api/charts', { params: {
-//                     restaurantId: {{Auth::user()->restaurant->id}}
-//                 }}).then((res) => {
-//                     console.log(res.data.results);
-//                     createCharts(res.data.results);
-//                 })
-
-//         });
-//     function createCharts(array){
-
-//             const arrayLabels = [];
-//             const arrayData = []
-//                 arrayData.forEach(element => {
-//                 arrayLabels.push(element.date);
-//                 arrayData.push(element.total);
-//             });
-
-//     const ctx = document.getElementById('myChart');
-      
-//     const labels = arrayLabels;
-//     // console.log(labels);
-//     const data = {
-//         labels: labels,
-//         datasets: [{
-//             label: 'N° Orders',
-//             data: arrayData,
-//             fill: false,
-//             borderColor: 'rgb(75, 192, 192)',
-//             tension: 0.1
-//         },{
-//             label: 'Bo',
-//             data: [12,10,2],
-//             fill: false,
-//             borderColor: 'rgb(0, 105, 12)',
-//             tension: 0.1
-//         }],
-//         options: {
-//             plugins: {
-//             legend: {
-//                 labels: {
-//                     // This more specific font property overrides the global property
-//                     font: {
-//                         size: 18
-//                     }
-//                 }
-//             }
-//         }
-//     }
-    
-//     };
-
-//     const cfg = {
-//         type: 'line',
-//         data: data,
-//     };
-//   new Chart(ctx, cfg);
-
-// }
-        
-
-  </script> --}}
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <script>
@@ -133,45 +70,45 @@
      
      
       // const data = [10,23];
-     const mybtn = document.getElementById('mybtn');
+    const mybtn = document.getElementById('mybtn');
+    const filterBtn = document.getElementById('sendFilter');
 
-    
-
-        setTimeout(() => {
-            
+    const createArraysToChart = function (arrayResponse){
         
-    
-            axios.get('/api/charts', { params: {
-                    restaurantId: {{Auth::user()->restaurant->id}}
+        const arrayLabels = [];
+        const arrayData = []
+        arrayResponse.forEach(element => {
+            arrayLabels.push(element.date);
+            arrayData.push(element.total);
+            // console.log(arrayLabels, arrayData)
+        });
+        // console.log(arrayLabels, arrayData)
+
+        return [arrayLabels, arrayData];
+    }
+
+    const createChart = function (filterToSend){
+        axios.get('/api/charts', { params: {
+                    restaurantId: {{Auth::user()->restaurant->id}},
+                    filter: filterToSend
                 }}).then((res) => {
-                    console.log(res.data.results);
+                     console.log(res.data.results);
 
                     
-                const arrayResponse = res.data.results
-
-                const arrayLabels = [];
-                const arrayData = []
-                    arrayResponse.forEach(element => {
-                    arrayLabels.push(element.date);
-                    arrayData.push(element.total);
-                });
+                const arrayResponse = res.data.results;
+                // let [arrayLabel, arrayData] = createArraysToChart(arrayResponse);
+                    
+                // console.log(createArraysToChart(arrayResponse));
       
-      
-                    const labels = arrayLabels;
-                    console.log(labels);
+                    const labels = createArraysToChart(arrayResponse)[0];
+                    // console.log(labels);
                     const data = {
                     labels: labels,
                     datasets: [{
                         label: 'N° Orders',
-                        data: arrayData,
+                        data: createArraysToChart(arrayResponse)[1],
                         fill: false,
                         borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                    },{
-                        label: 'Bo',
-                        data: [12,10,2],
-                        fill: false,
-                        borderColor: 'rgb(0, 105, 12)',
                         tension: 0.1
                     }],options: {
                     responsive: true,
@@ -210,46 +147,40 @@
                         type: 'line',
                         data: data,
                     };
-                new Chart(ctx, cfg);
-
-
-                const ctx2 = document.getElementById('myChart2');
-
-                    const cfg2 = {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                    data: [{id: 'Sales', nested: {value: 1500}}, {id: 'Purchases', nested: {value: 500}}]
-                    }]
-                },
-                options: {
-                    parsing: {
-                    key: 'nested.value'
+                const chart = new Chart(ctx, cfg);
+                    
+                filterBtn.addEventListener('click', ()=>{
+                    const dateArray =document.getElementById('filter').value.split('-');
+                    let filter = '';
+                    for (let i = 0; i < 2; i++) {
+                        filter += dateArray[i]+'-'
                     }
-                }
-                }
-                new Chart(ctx2, cfg2);
+                    console.log(filter)
+                    chart.destroy();
+                    createChart(filter);
+                
                 })
+                // const ctx2 = document.getElementById('myChart2');
 
-            }, 100);
+                //     const cfg2 = {
+                // type: 'doughnut',
+                // data: {
+                //     datasets: [{
+                //     data: [{id: 'Sales', nested: {value: 1500}}, {id: 'Purchases', nested: {value: 500}}]
+                //     }]
+                // },
+                // options: {
+                //     parsing: {
+                //     key: 'nested.value'
+                //     }
+                // }
+                // }
+                // new Chart(ctx2, cfg2);
+                 })
+    }
+
+        setTimeout(() => {createChart(document.getElementById('filter').value)}, 100);
  
-
-        // const cose = '@foreach ($orders as $order) {!! $order !!} @endforeach';
-        // const arraynonso = cose.split('  ');
-        // console.log(arraynonso);
-        // console.log(JSON.parse(arraynonso[1]));
-        
-
-        // const arrayLabels = [];
-        // const arrayData = [];
-
-        // arraynonso.forEach(element => {
-        //     element = JSON.parse(element);
-            
-        //     arrayLabels.push(element.date.split(' ')[0]);
-        //     arrayData.push(element.total);
-        // });
-
         
   </script>
 @endsection

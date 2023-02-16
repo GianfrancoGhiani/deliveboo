@@ -36,7 +36,7 @@ class OrderSeeder extends Seeder
         //     $neworder->products()->attach([1, 4, 7, 10]);
         //     // $neworder->products()->attach([30, 31, 32, 33]);
         // }
-        for ($i = 0; $i < 1; $i++) {
+        for ($i = 0; $i < 7; $i++) {
             $neworder = new Order();
             $neworder->customer_firstname = $faker->name();
             $neworder->customer_lastname = $faker->lastName();
@@ -47,8 +47,7 @@ class OrderSeeder extends Seeder
             $neworder->paid = $faker->numberBetween(0, 1);
             $neworder->description = $faker->text();
             $neworder->restaurant_id = 2;
-            $neworder->created_at = Carbon::createFromFormat('Y-m-d H:i:s', '2023-01-01 15:30:00');
-            ;
+            $neworder->created_at = Carbon::createFromFormat('Y-m-d H:i:s', '2023-01-29 15:30:00');;
             $neworder->save();
             //$neworder->products()->attach([1, 4, 7, 10]);
             $neworder->products()->attach([30, 31, 32, 33]);
