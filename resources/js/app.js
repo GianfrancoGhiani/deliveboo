@@ -6,6 +6,9 @@ import.meta.glob([
 ])
 
 
+
+
+
 // modale per il bottone delete
 //seleziono tutti gli elementi con la classe .mt-delete
 const deleteSubmitButtons = document.querySelectorAll('.delete-button');

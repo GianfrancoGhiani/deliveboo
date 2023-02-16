@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\ChartsController;
 use App\Http\Controllers\Api\RestaurantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,7 @@ Route::get('restaurant/{id}', [RestaurantController::class, 'info']);
 //get single product
 Route::get('product/{id}/{slug}', [RestaurantController::class, 'singleproduct']);
 
-
+Route::get('charts', [ChartsController::class, 'index']);
 
 
 //ordering routes

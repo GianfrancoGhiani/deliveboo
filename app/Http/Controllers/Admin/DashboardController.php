@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -26,7 +28,9 @@ class DashboardController extends Controller
 
             $restaurant = Restaurant::where('user_id', Auth::id())->first();
             // dd($restaurant);
-            return view('admin.dashboard', compact('restaurant'));
+            $orders = Order::where('restaurant_id', Auth::user()->restaurant->id)->selectRaw('count(*) as total, DATE(created_at) as date')->groupBy(DB::raw("DATE(created_at)"))->get();
+            // dd($orders);
+            return view('admin.dashboard', compact('restaurant', 'orders'));
         } else {
             // dd('non hai il ristorante');
             return redirect()->route('admin.restaurants.create');
