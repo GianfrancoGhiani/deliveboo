@@ -39,16 +39,9 @@ class ChartsController extends Controller
 
 
 
-
-        $weeksAgo = request('weeks_ago', 0);
+        $weeksAgo = $request->input('week_ago');
         $startDate = Carbon::now()->startOfWeek()->subWeeks($weeksAgo); // data di inizio settimana (lunedì)
         $endDate = $startDate->copy()->addDays(6); // data di fine settimana (domenica)
-
-        // $orders = Order::select(DB::raw('DATE(created_at) as date'), DB::raw('COUNT(*) as total'))
-        //     ->whereBetween('created_at', [$startDate, $endDate])
-        //     ->groupBy('date')
-        //     ->get();
-
         $orders = Order::where('restaurant_id', $request->restaurantId)->selectRaw('count(*) as total, DATE(created_at) as date')->whereBetween('created_at', [$startDate, $endDate])->groupBy(DB::raw("DATE(created_at)"))->get();
 
 
@@ -65,7 +58,6 @@ class ChartsController extends Controller
         foreach ($orders as $order) {
             $day = Carbon::parse($order['date'])->format('l');
             $week[$day] = $order['total'];
-
         }
 
         $data = [

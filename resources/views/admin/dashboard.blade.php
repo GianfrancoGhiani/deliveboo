@@ -75,7 +75,7 @@
       
      
      
-      // const data = [10,23];
+
     const mybtn = document.getElementById('mybtn');
     const filterBtn = document.getElementById('sendFilter');
 
@@ -93,10 +93,9 @@
         return [arrayLabels, arrayData];
     }
 
-    const createChart = function (filterToSend,week){
+    const createChart = function (week){
         axios.get('/api/charts/weekorders', { params: {
                     restaurantId: {{Auth::user()->restaurant->id}},
-                    filter: filterToSend,
                     week_ago: week 
 
                 }}).then((res) => {
@@ -104,10 +103,7 @@
 
                     
                 const arrayResponse = res.data.results;
-                // let [arrayLabel, arrayData] = createArraysToChart(arrayResponse);
-                    
-                // console.log(createArraysToChart(arrayResponse));
-                
+
                 const days = [];
                 for(let day of Object.values(res.data.results)){
                     console.log(day);
@@ -115,10 +111,9 @@
                     
                 }
                 console.log(days);
-                    // const labels = createArraysToChart(arrayResponse)[0];
-                    // console.log(labels);
-                    const data = {
-                    labels: ['Mond','Tues','Wednes','Thuesd','Friday','Saturd','Sunday'],
+
+                const data = {
+                    labels: ['Monday','Tuesday','Wednesday','Thursday ','Friday','Saturday','Sunday'],
                     datasets: [{
                         label: 'N° Orders',
                         // data: createArraysToChart(arrayResponse)[1],
@@ -149,7 +144,6 @@
                         type: 'linear',
                         display: true,
                         position: 'right',
-
                         // grid line settings
                         grid: {
                         drawOnChartArea: false, // only want the grid lines for one axis to show up
@@ -158,22 +152,19 @@
                     }}
                     
                     };
-
                     const cfg = {
                         type: 'line',
                         data: data,
-                    };
+                };
                 const chart = new Chart(ctx, cfg);
-                    
+
                 filterBtn.addEventListener('click', ()=>{
-                    const dateArray =document.getElementById('week_ago').value.split('-');
-                    let filter = '';
-                    for (let i = 0; i < 2; i++) {
-                        filter += dateArray[i]+'-'
-                    }
-                    console.log(filter)
+                    const dateArray =document.getElementById('week').value;
+                    let weekYear = dateArray.split('-')[1];
+                    weekYear = parseInt(weekYear.split('')[1]+weekYear.split('')[2]);
+                    const week_ago = {{date('W')}} - weekYear;
                     chart.destroy();
-                    createChart(filter);
+                    createChart(week_ago);
                 
                 })
                 // const ctx2 = document.getElementById('myChart2');
@@ -195,7 +186,7 @@
                  })
     }
 
-        setTimeout(() => {createChart(document.getElementById('input_week').value,input_week.value)}, 100);
+    setTimeout(() => {createChart(0)}, 100);
  
         
   </script>
