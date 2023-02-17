@@ -46,7 +46,7 @@
         <div class="row">
             <div class="row">
                 {{-- <input class="col"  type="month" name="filter" id="filter" value="{{date('Y-m')}}"> --}}
-                <input class="col"  type="week" name="filter" id="input_week" value="{{date('Y').'-W'.date('W')}}">
+                <input class="col"  type="week" name="filter" id="week" value="{{date('Y').'-W'.date('W')}}">
                 <button id="sendFilter">Send</button>
             </div>
             <div class="col-12">
@@ -65,11 +65,13 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <script>
-      const input_week = document.getElementById('input_week');
+
+    const input_week = document.getElementById('week');
       input_week.addEventListener('change', () => {
         console.log(input_week.value);
       })
-      const ctx = document.getElementById('myChart');
+
+    const ctx = document.getElementById('myChart');
       
      
      
@@ -91,10 +93,11 @@
         return [arrayLabels, arrayData];
     }
 
-    const createChart = function (filterToSend){
+    const createChart = function (filterToSend,week){
         axios.get('/api/charts/weekorders', { params: {
                     restaurantId: {{Auth::user()->restaurant->id}},
                     filter: filterToSend,
+                    week_ago: week 
 
                 }}).then((res) => {
                      console.log(res.data.results);
@@ -163,7 +166,7 @@
                 const chart = new Chart(ctx, cfg);
                     
                 filterBtn.addEventListener('click', ()=>{
-                    const dateArray =document.getElementById('filter').value.split('-');
+                    const dateArray =document.getElementById('week_ago').value.split('-');
                     let filter = '';
                     for (let i = 0; i < 2; i++) {
                         filter += dateArray[i]+'-'
@@ -192,7 +195,7 @@
                  })
     }
 
-        setTimeout(() => {createChart(document.getElementById('input_week').value)}, 100);
+        setTimeout(() => {createChart(document.getElementById('input_week').value,input_week.value)}, 100);
  
         
   </script>
