@@ -31,6 +31,7 @@ Route::get('restaurant/{id}', [RestaurantController::class, 'info']);
 Route::get('product/{id}/{slug}', [RestaurantController::class, 'singleproduct']);
 
 Route::get('charts', [ChartsController::class, 'index']);
+Route::get('charts/weekorders', [ChartsController::class, 'weekorders']);
 //contact us route
 Route::post('contacts', [LeadController::class, 'store']);
 

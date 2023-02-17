@@ -88,9 +88,10 @@
     }
 
     const createChart = function (filterToSend){
-        axios.get('/api/charts', { params: {
+        axios.get('/api/charts/weekorders', { params: {
                     restaurantId: {{Auth::user()->restaurant->id}},
-                    filter: filterToSend
+                    filter: filterToSend,
+
                 }}).then((res) => {
                      console.log(res.data.results);
 
@@ -99,14 +100,22 @@
                 // let [arrayLabel, arrayData] = createArraysToChart(arrayResponse);
                     
                 // console.log(createArraysToChart(arrayResponse));
-      
-                    const labels = createArraysToChart(arrayResponse)[0];
+                
+                const days = [];
+                for(let day of Object.values(res.data.results)){
+                    console.log(day);
+                    days.push(day);
+                    
+                }
+                console.log(days);
+                    // const labels = createArraysToChart(arrayResponse)[0];
                     // console.log(labels);
                     const data = {
-                    labels: labels,
+                    labels: ['Mond','Tues','Wednes','Thuesd','Friday','Saturd','Sunday'],
                     datasets: [{
                         label: 'N° Orders',
-                        data: createArraysToChart(arrayResponse)[1],
+                        // data: createArraysToChart(arrayResponse)[1],
+                        data: days,
                         fill: false,
                         borderColor: 'rgb(75, 192, 192)',
                         tension: 0.1

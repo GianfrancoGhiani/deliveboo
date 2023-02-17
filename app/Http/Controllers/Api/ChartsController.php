@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,47 @@ class ChartsController extends Controller
         $data = [
             'success' => true,
             'results' => $orders
+        ];
+        return response()->json($data);
+    }
+
+    public function weekorders(Request $request)
+    {
+
+
+
+
+        $weeksAgo = request('weeks_ago', 0);
+        $startDate = Carbon::now()->startOfWeek()->subWeeks($weeksAgo); // data di inizio settimana (lunedì)
+        $endDate = $startDate->copy()->addDays(6); // data di fine settimana (domenica)
+
+        // $orders = Order::select(DB::raw('DATE(created_at) as date'), DB::raw('COUNT(*) as total'))
+        //     ->whereBetween('created_at', [$startDate, $endDate])
+        //     ->groupBy('date')
+        //     ->get();
+
+        $orders = Order::where('restaurant_id', $request->restaurantId)->selectRaw('count(*) as total, DATE(created_at) as date')->whereBetween('created_at', [$startDate, $endDate])->groupBy(DB::raw("DATE(created_at)"))->get();
+
+
+
+        $week = [
+            'Monday' => 0,
+            'Tuesday' => 0,
+            'Wednesday' => 0,
+            'Thursday' => 0,
+            'Friday' => 0,
+            'Saturday' => 0,
+            'Sunday' => 0,
+        ];
+        foreach ($orders as $order) {
+            $day = Carbon::parse($order['date'])->format('l');
+            $week[$day] = $order['total'];
+
+        }
+
+        $data = [
+            'success' => true,
+            'results' => $week
         ];
         return response()->json($data);
     }
