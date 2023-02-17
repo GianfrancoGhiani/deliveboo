@@ -41,7 +41,7 @@ class ChartsController extends Controller
 
         $weeksAgo = $request->input('week_ago');
         $startDate = Carbon::now()->startOfWeek()->subWeeks($weeksAgo); // data di inizio settimana (lunedì)
-        $endDate = $startDate->copy()->addDays(6); // data di fine settimana (domenica)
+        $endDate = $startDate->copy()->addDays(7); // data di fine settimana (domenica)
         $orders = Order::where('restaurant_id', $request->restaurantId)->selectRaw('count(*) as total, DATE(created_at) as date')->whereBetween('created_at', [$startDate, $endDate])->groupBy(DB::raw("DATE(created_at)"))->get();
 
 
