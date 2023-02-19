@@ -73,7 +73,7 @@ class RestaurantController extends Controller
     public function show($restaurantId, $restaurantslug)
     {
 
-        $products = Product::where('restaurant_id', $restaurantId)->paginate(12);
+        $products = Product::where('restaurant_id', $restaurantId)->where('available', 1)->paginate(12);
         return response()->json([
             'success' => true,
             'results' => $products
