@@ -3,7 +3,7 @@
 @section('content')
 <div id="dashboard" class="container">
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-lg-8 col-md-12">
             <div class="card bg-dark-light">
                 <div class="card-header py-4 d-flex justify-content-around">
                     <img src="{{asset('storage/'.$restaurant->image_url)}}" alt="Image"/>

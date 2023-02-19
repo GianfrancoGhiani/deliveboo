@@ -1,6 +1,6 @@
 <nav id="sidebarMenu">
     <a href="{{route('admin.dashboard')}}" class="nav-link text-white" >
-        <h2 class="p-2"><i class="fa-solid fa-truck-fast me-3"></i>Deliveboo</h2>
+        <h2 class="p-2" style="height: 4.5rem"><img src="{{asset('/Deliveboo-logo-white.png')}}" alt="" class="h-100"></h2>
     </a>
     <ul class="nav flex-column">
         <li class="nav-item">

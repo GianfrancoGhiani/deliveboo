@@ -27,7 +27,7 @@
             <div class="container ">
                 <a id="app-logo" class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                     <div  class="logo_laravel">
-                        <h2 class="p-2 text-danger"><i class="fa-solid fa-truck-fast me-3"></i>Deliveboo</h2>
+                        <div style="height: 2.5rem" ><img src="{{asset('/Deliveboo-logo-white.png')}}" alt="" style="max-height: 100%"></div>
                     </div>
                     {{-- config('app.name', 'Laravel') --}}
                 </a>
@@ -38,14 +38,10 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
-                        </li>
-                    </ul>
+                    
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">

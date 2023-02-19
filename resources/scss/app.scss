@@ -19,23 +19,26 @@ $fa-font-path: "./webfonts" !default;
 .pagination {
     cursor: pointer;
     .page-item{
-        background-color: $bg-youtube-dark !important;
+        // background-color: $bg-youtube-dark ;
         .page-link{
-            background-color: $bg-youtube-dark !important;
+            background-color: $bg-youtube-dark ;
             border: 1px solid $my-secondary;
                 color: white;
                 &:hover {
-                    color: $bg-youtube-light ;
+                    color: $white-txt ;
+                    background-color: $bg-youtube-light;
                 }
-    
-
+            }
         }
-
-
+    .active > .page-link,  .page-link:focus{
+            background-color: #FC8019 ;
+        
+            box-shadow: none;
     }
-        
-        
+
 }
+        
+        
 .bg-dark-mode{
     background-color: $bg-youtube-dark;
     color: $white-txt;
