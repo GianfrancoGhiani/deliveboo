@@ -198,14 +198,29 @@ https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js
                 const cfg2 = {
                     type: 'pie',
                     data: data,
-                    options: {plugins:
-                        {legend:
-                            {position: 'right'}
-                        }
+                    options:{
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Most ordered products',
+                                font: {
+                                    size: 18
+                                }
+                            },
+                            
+                            legend:{
+                                position: 'bottom',
+                                labels: {
+                                    font: {
+                                        size: 14,
+                                    }
+                                }
+                            }
                     }
-                };
-                 new Chart(ctx2, cfg2);
-            })
+                }}
+                new Chart(ctx2, cfg2);
+            }
+            )
         
     }
   </script>
