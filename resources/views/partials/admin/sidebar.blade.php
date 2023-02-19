@@ -10,17 +10,17 @@
         </li>
         <li class="nav-item">
             <a class="nav-link {{ Route::currentRouteName() == 'admin.products.index' ? 'active-item' : '' }}" href="{{route('admin.products.index')}}">
-                <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Products
+                <i class="fa-solid fa-utensils"></i> Products
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ Route::currentRouteName() == 'admin.orders.index' ? 'active-item' : '' }}" href="{{route('admin.orders.index')}}">
-                <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Orders
+                <i class="fa-solid fa-calendar-check"></i> Orders
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ Route::currentRouteName() == 'admin.stats' ? 'active-item' : '' }}" href="{{route('admin.stats')}}">
-                <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Stats
+                <i class="fa-solid fa-chart-simple"></i> Stats
             </a>
         </li>
 

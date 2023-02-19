@@ -26,7 +26,7 @@
                     <th scope="col">Product</th>
                     <th scope="col">Ingredients</th>
                     <th scope="col">Preview</th>
-                    <th scope="col" class="text-center">Category</th>
+                    
                     <th scope="col"  class="text-center">Price</th>
                     <th scope="col">Edit</th>
                     <th scope="col"  class="text-center">Delete</th>
@@ -41,8 +41,7 @@
                             <td style="width: 50rem">{{$product->ingredients}}</td>
                             {{-- preview --}}
                             <td style="width: 5rem"><img src="{{asset('storage/' . $product->image_url)}}" alt="" class="w-100"></td>
-                            {{-- category --}}
-                            <td class="text-center">{{$product->category ? $product->category->name : 'Without category'}}</td>
+                            
                             {{-- price --}}
                             <td class="text-center">€ {{$product?->price}}</td>
                             {{-- edit --}}
