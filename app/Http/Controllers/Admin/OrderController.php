@@ -29,8 +29,8 @@ class OrderController extends Controller
             ->when($dateOrder, function ($query, $dateOrder) {
                 $query->orderby('updated_at', $dateOrder);
             }, function ($query) {
-                $query->orderby('updated_at', 'desc');
-            })
+            $query->orderby('updated_at', 'desc');
+        })
             ->when($dateSelect, function ($query, $dateSelect) {
                 $query->whereDate('updated_at', $dateSelect);
             })

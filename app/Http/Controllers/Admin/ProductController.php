@@ -14,17 +14,17 @@ use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+    * Display a listing of the resource.
+    *
     
-     */
+    */
     public function index()
     {
         //filtriamo i prodotti con una query build di laravel per visualizzare solo i prodotti di quel determinato ristorante
         if (Auth::user()->restaurant->id) {
 
             $restaurantId = Auth::user()->restaurant->id;
-            $products = Product::where('restaurant_id', $restaurantId)->get();
+            $products = Product::where('restaurant_id', $restaurantId)->paginate(10);
             return view('admin.products.index', compact('products'));
         } else {
             $types = Type::all();
@@ -155,11 +155,11 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Models\Product  $product
+    * Update the specified resource in storage.
+    *
+    * @param  \App\Models\Product  $product
     
-     */
+    */
     public function update(UpdateProductRequest $request, Product $product)
     {
 

@@ -16,14 +16,33 @@ $fa-font-path: "./webfonts" !default;
 // body{
 //     color: #f2f2f2;
 // }
+.pagination {
+    cursor: pointer;
+    .page-item{
+        background-color: $bg-youtube-dark !important;
+        .page-link{
+            background-color: $bg-youtube-dark !important;
+            border: 1px solid $my-secondary;
+                color: white;
+                &:hover {
+                    color: $bg-youtube-light ;
+                }
+    
 
+        }
+
+
+    }
+        
+        
+}
 .bg-dark-mode{
     background-color: $bg-youtube-dark;
     color: $white-txt;
 }
 
 .bg-dark-light{
-    background-color: $bg-youtube-light;
+    background-color: $bg-youtube-light !important;
     color: $white-txt;
 }
 
