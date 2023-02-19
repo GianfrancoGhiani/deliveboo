@@ -43,20 +43,20 @@
 <div>
 
     <div class="container p-5">
-        <div class="row">
-            <div class="row">
+        <div class="row row-cols-1">
+            <div class="col row">
                 {{-- <input class="col"  type="month" name="filter" id="filter" value="{{date('Y-m')}}"> --}}
                 <input class="col"  type="week" name="filter" id="week" value="{{date('Y').'-W'.date('W')}}">
-                <button id="sendFilter">Send</button>
+                <button class="col" id="sendFilter">Send</button>
             </div>
-            <div class="col-12">
-
-                <canvas id="myChart"></canvas>
+            <div class=" col row align-items-center">
+                <div class="col-6">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class="col-6">
+                    <canvas id="myChart2"></canvas>
+                </div>
             </div>
-            {{-- <div class="col-6">
-
-                <canvas id="myChart2"></canvas>
-            </div> --}}
         </div>
 
     </div>
@@ -99,7 +99,7 @@
                     week_ago: week 
 
                 }}).then((res) => {
-                    //  console.log(res.data.results);
+                      console.log(res.data.results);
 
                     
                 const arrayResponse = res.data.results;
@@ -113,13 +113,14 @@
                 // console.log(days);
 
                 const data = {
+                    
                     labels: ['Monday','Tuesday','Wednesday','Thursday ','Friday','Saturday','Sunday'],
                     datasets: [{
                         label: 'N° Orders',
                         // data: createArraysToChart(arrayResponse)[1],
                         data: days,
                         fill: false,
-                        borderColor: 'rgb(75, 192, 192)',
+                        color: 'rgb(75, 192, 192)',
                         tension: 0.1
                     }],options: {
                     responsive: true,
@@ -136,25 +137,13 @@
                     },
                     scales: {
                     y: {
-                        type: 'linear',
-                        display: true,
-                        position: 'left',
-                    },
-                    y1: {
-                        
-                        type: 'linear',
-                        display: true,
-                        position: 'right',
-                        // grid line settings
-                        grid: {
-                        drawOnChartArea: false, // only want the grid lines for one axis to show up
-                        },
-                    },
+                        beginAtZero: true
+                    }
                     }}
                     
                     };
                     const cfg = {
-                        type: 'line',
+                        type: 'bar',
                         data: data,
                 };
                 const chart = new Chart(ctx, cfg);
@@ -168,28 +157,12 @@
                     createChart(week_ago);
                 
                 })
-                // const ctx2 = document.getElementById('myChart2');
-
-                //     const cfg2 = {
-                // type: 'doughnut',
-                // data: {
-                //     datasets: [{
-                //     data: [{id: 'Sales', nested: {value: 1500}}, {id: 'Purchases', nested: {value: 500}}]
-                //     }]
-                // },
-                // options: {
-                //     parsing: {
-                //     key: 'nested.value'
-                //     }
-                // }
-                // }
-                // new Chart(ctx2, cfg2);
-                 })
+            })
     }
 
     setTimeout(() => {
         createChart(0);
-    createOrderChart();
+        createOrderChart();
 
     }, 100);
 
@@ -198,8 +171,43 @@
         axios.get('/api/charts/mostordered', { params: {
             restaurantId: {{Auth::user()->restaurant->id}}
             }}).then((res) => {
-                console.log(res)
+                // console.log(res.data.results)
+                const ctx2 = document.getElementById('myChart2');
+                const topFiveProducts = [];
+                const topFiveQuantities = [];
+                for (let i = 0; i < 5; i++) {
+                    // console.log(res.data.results[i].product_name);
+                    topFiveProducts.push(res.data.results[i].product_name);
+                    topFiveQuantities.push(res.data.results[i].total_quantity);
+                    
+                }
+                // console.log(topFiveProducts, topFiveQuantities)
+                const data = {
+                    labels: topFiveProducts,
+                    datasets: [{
+                        data: topFiveQuantities,
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(75, 192, 192)',
+                            'rgb(255, 205, 86)',
+                            'rgb(0,130,130)',
+                            'rgb(0,130,10)'
+                        ],
+                        hoverOffset: 0
+                    }]
+                };
+                const cfg2 = {
+                    type: 'pie',
+                    data: data,
+                    options: {plugins:
+                        {legend:
+                            {position: 'right'}
+                        }
+                    }
+                };
+                 new Chart(ctx2, cfg2);
             })
+        
     }
   </script>
 @endsection

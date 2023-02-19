@@ -16,21 +16,31 @@ class ChartsController extends Controller
     public function mostordered(Request $request)
     {
 
-        // $products = Product::where('restaurant_id', $request->restaurantId)
-        //     ->whereHas(
-        //         'orders',
-        //         function ($q) {
-        //             $q->selectRaw('count(*) as total, product_id as id')
-        //                 ->groupBy('product_id');
-        //         }
-        //     )->get();
-        $products = Product::where('restaurant_id', $request->restaurantId)
-            ->select(DB::raw('count(*) as total'))
-            ->with('orders')->get()->groupBy('orders.*.id');
+        $orders = Order::where('orders.restaurant_id', $request->restaurantId)->has('products')->with('products')->get();
 
+        $productQuantities = [];
+
+        foreach ($orders as $order) {
+            foreach ($order->products as $product) {
+                if (!isset($productQuantities[$product->id])) {
+                    $productQuantities[$product->id] = [
+                        'product_id' => $product->id,
+                        'product_name' => $product->name,
+                        'total_quantity' => 0,
+                    ];
+                }
+                $productQuantities[$product->id]['total_quantity'] += $product->pivot->quantity;
+            }
+        }
+
+        $productQuantities = array_values($productQuantities);
+        usort($productQuantities, function ($a, $b) {
+            return $b['total_quantity'] - $a['total_quantity'];
+        });
+        // dd($productQuantities);
         $data = [
             'success' => true,
-            'results' => $products
+            'results' => $productQuantities
         ];
         return response()->json($data);
     }
