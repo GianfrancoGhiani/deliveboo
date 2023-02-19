@@ -99,18 +99,18 @@
                     week_ago: week 
 
                 }}).then((res) => {
-                     console.log(res.data.results);
+                    //  console.log(res.data.results);
 
                     
                 const arrayResponse = res.data.results;
 
                 const days = [];
                 for(let day of Object.values(res.data.results)){
-                    console.log(day);
+                    // console.log(day);
                     days.push(day);
                     
                 }
-                console.log(days);
+                // console.log(days);
 
                 const data = {
                     labels: ['Monday','Tuesday','Wednesday','Thursday ','Friday','Saturday','Sunday'],
@@ -141,6 +141,7 @@
                         position: 'left',
                     },
                     y1: {
+                        
                         type: 'linear',
                         display: true,
                         position: 'right',
@@ -186,8 +187,19 @@
                  })
     }
 
-    setTimeout(() => {createChart(0)}, 100);
- 
-        
+    setTimeout(() => {
+        createChart(0);
+    createOrderChart();
+
+    }, 100);
+
+    const createOrderChart = function ()
+    {
+        axios.get('/api/charts/mostordered', { params: {
+            restaurantId: {{Auth::user()->restaurant->id}}
+            }}).then((res) => {
+                console.log(res)
+            })
+    }
   </script>
 @endsection

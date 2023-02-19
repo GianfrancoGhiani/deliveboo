@@ -30,8 +30,10 @@ Route::get('restaurant/{id}', [RestaurantController::class, 'info']);
 //get single product
 Route::get('product/{id}/{slug}', [RestaurantController::class, 'singleproduct']);
 
-Route::get('charts', [ChartsController::class, 'index']);
+//charts
+Route::get('charts/mostordered', [ChartsController::class, 'mostordered']);
 Route::get('charts/weekorders', [ChartsController::class, 'weekorders']);
+
 //contact us route
 Route::post('contacts', [LeadController::class, 'store']);
 
