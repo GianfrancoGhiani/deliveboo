@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="dashboard" class="container">
-    {{-- <div class="row justify-content-center">
+    <div class="row justify-content-center">
         <div class="col-8">
             <div class="card bg-dark-light">
                 <div class="card-header py-4 d-flex justify-content-around">
@@ -38,7 +38,7 @@
             </ul>
             </div>
         </div>
-    </div> --}}
+    </div>
 </div>
 <div>
 
@@ -46,8 +46,8 @@
         <div class="row row-cols-1">
             <div class="col row">
                 {{-- <input class="col"  type="month" name="filter" id="filter" value="{{date('Y-m')}}"> --}}
-                <input class="col"  type="week" name="filter" id="week" value="{{date('Y').'-W'.date('W')}}">
-                <button class="col" id="sendFilter">Send</button>
+                <input class="col-auto"  type="week" name="filter" id="week" value="{{date('Y').'-W'.date('W')}}">
+                <button class="col-auto" id="sendFilter">Send</button>
             </div>
             <div class=" col row align-items-center">
                 <div class="col-6">
@@ -58,18 +58,23 @@
                 </div>
             </div>
         </div>
-
+        
     </div>
-  </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js
+"></script>
+
   
-  <script>
+<script>
+    
 
     const input_week = document.getElementById('week');
-      input_week.addEventListener('change', () => {
-        console.log(input_week.value);
-      })
+    //   input_week.addEventListener('change', () => {
+    //     console.log(input_week.value);
+    //   })
+
 
     const ctx = document.getElementById('myChart');
       
@@ -120,26 +125,45 @@
                         // data: createArraysToChart(arrayResponse)[1],
                         data: days,
                         fill: false,
-                        color: 'rgb(75, 192, 192)',
+                        
+                        hoverBackgroundColor:[
+      'rgba(255, 99, 132, 0.9)',
+      'rgba(255, 159, 64, 0.9)',
+      'rgba(255, 205, 86, 0.9)',
+      'rgba(75, 192, 192, 0.9)',
+      'rgba(54, 162, 235, 0.9)',
+      'rgba(153, 102, 255, 0.9)',
+      'rgba(201, 203, 207, 0.9)'
+    ],
+                        backgroundColor: [
+      'rgba(255, 99, 132, 0.5)',
+      'rgba(255, 159, 64, 0.5)',
+      'rgba(255, 205, 86, 0.5)',
+      'rgba(75, 192, 192, 0.5)',
+      'rgba(54, 162, 235, 0.5)',
+      'rgba(153, 102, 255, 0.5)',
+      'rgba(201, 203, 207, 0.5)'
+    ],
+                        borderColor: 'rgb(75, 192, 192)',
+                        borderWidth: 1,
                         tension: 0.1
-                    }],options: {
-                    responsive: true,
-                    interaction: {
-                    mode: 'index',
-                    intersect: false,
-                    },
-                    stacked: false,
-                    plugins: {
-                    title: {
-                        display: true,
-                        text: 'Chart.js Line Chart - Multi Axis'
-                    }
-                    },
-                    scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                    }}
+                    }],
+                    options: {
+                          scales: {
+                                x: {
+                                  grid: {
+                                   color: 'rgb(75, 192, 192)',
+                                   borderColor: 'green'
+                                   }
+                                },
+                                y: {
+                                  grid: {
+                                       color: 'red',
+                                     borderColor: 'green'
+                                    }
+                                    }
+                              }
+                           }
                     
                     };
                     const cfg = {
@@ -148,7 +172,7 @@
                 };
                 const chart = new Chart(ctx, cfg);
 
-                filterBtn.addEventListener('click', ()=>{
+                input_week.addEventListener('change', ()=>{
                     const dateArray =document.getElementById('week').value;
                     let weekYear = dateArray.split('-')[1];
                     weekYear = parseInt(weekYear.split('')[1]+weekYear.split('')[2]);
