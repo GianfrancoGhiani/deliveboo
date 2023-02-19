@@ -16,14 +16,36 @@ $fa-font-path: "./webfonts" !default;
 // body{
 //     color: #f2f2f2;
 // }
+.pagination {
+    cursor: pointer;
+    .page-item{
+        // background-color: $bg-youtube-dark ;
+        .page-link{
+            background-color: $bg-youtube-dark ;
+            border: 1px solid $my-secondary;
+                color: white;
+                &:hover {
+                    color: $white-txt ;
+                    background-color: $bg-youtube-light;
+                }
+            }
+        }
+    .active > .page-link,  .page-link:focus{
+            background-color: #FC8019 ;
+        
+            box-shadow: none;
+    }
 
+}
+        
+        
 .bg-dark-mode{
     background-color: $bg-youtube-dark;
     color: $white-txt;
 }
 
 .bg-dark-light{
-    background-color: $bg-youtube-light;
+    background-color: $bg-youtube-light !important;
     color: $white-txt;
 }
 
