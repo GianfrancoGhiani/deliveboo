@@ -13,7 +13,6 @@
             <div class="col row">
                 {{-- <input class="col"  type="month" name="filter" id="filter" value="{{date('Y-m')}}"> --}}
                 <input class="col-auto"  type="week" name="filter" id="week" value="{{date('Y').'-W'.date('W')}}">
-                <button class="col-auto" id="sendFilter">Send</button>
             </div>
             <div class="col row align-items-center">
                 <div class="col-6">
@@ -48,7 +47,7 @@ https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js
      
 
     const mybtn = document.getElementById('mybtn');
-    const filterBtn = document.getElementById('sendFilter');
+
 
     const createArraysToChart = function (arrayResponse){
         
