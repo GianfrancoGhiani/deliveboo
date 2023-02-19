@@ -41,13 +41,10 @@ class OrderController extends Controller
         if ($result->success) {
             $request->products;
 
-            $description = "Payment done correctly! Thank you " . $request->customerData['customer_firstname'] . "
-            You have ordered: 
-            ";
+            $description = "Payment done correctly! <br>Thank you " . $request->customerData['customer_firstname'] . " <br>You have ordered: <br>";
             foreach ($request->products as $productData) {
                 $product = Product::where('id', $productData['id'])->first();
-                $description .= $product->name . ", quantity: " . $productData['q'] .  "
-                ";
+                $description .= $product->name . ", quantity: " . $productData['q'] .  "<br>";
             };
         } else {
             $description = 'Payment refused!';

@@ -6,6 +6,9 @@
 <div>
 
     <div class="container p-5">
+        <div class="card-header">
+            <h1 class="">Stats</h1>
+        </div>
         <div class="row row-cols-1">
             <div class="col row">
                 {{-- <input class="col"  type="month" name="filter" id="filter" value="{{date('Y-m')}}"> --}}
