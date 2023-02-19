@@ -49,7 +49,7 @@
                 <input class="col-auto"  type="week" name="filter" id="week" value="{{date('Y').'-W'.date('W')}}">
                 <button class="col-auto" id="sendFilter">Send</button>
             </div>
-            <div class=" col row align-items-center">
+            <div class="col row align-items-center">
                 <div class="col-6">
                     <canvas id="myChart"></canvas>
                 </div>
@@ -127,23 +127,23 @@ https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js
                         fill: false,
                         
                         hoverBackgroundColor:[
-      'rgba(255, 99, 132, 0.9)',
-      'rgba(255, 159, 64, 0.9)',
-      'rgba(255, 205, 86, 0.9)',
-      'rgba(75, 192, 192, 0.9)',
-      'rgba(54, 162, 235, 0.9)',
-      'rgba(153, 102, 255, 0.9)',
-      'rgba(201, 203, 207, 0.9)'
-    ],
+                          'rgba(255, 99, 132, 0.9)',
+                          'rgba(255, 159, 64, 0.9)',
+                          'rgba(255, 205, 86, 0.9)',
+                          'rgba(75, 192, 192, 0.9)',
+                          'rgba(54, 162, 235, 0.9)',
+                          'rgba(153, 102, 255, 0.9)',
+                          'rgba(201, 203, 207, 0.9)'
+                        ],
                         backgroundColor: [
-      'rgba(255, 99, 132, 0.5)',
-      'rgba(255, 159, 64, 0.5)',
-      'rgba(255, 205, 86, 0.5)',
-      'rgba(75, 192, 192, 0.5)',
-      'rgba(54, 162, 235, 0.5)',
-      'rgba(153, 102, 255, 0.5)',
-      'rgba(201, 203, 207, 0.5)'
-    ],
+                          'rgba(255, 99, 132, 0.5)',
+                          'rgba(255, 159, 64, 0.5)',
+                          'rgba(255, 205, 86, 0.5)',
+                          'rgba(75, 192, 192, 0.5)',
+                          'rgba(54, 162, 235, 0.5)',
+                          'rgba(153, 102, 255, 0.5)',
+                          'rgba(201, 203, 207, 0.5)'
+                        ],
                         borderColor: 'rgb(75, 192, 192)',
                         borderWidth: 1,
                         tension: 0.1
@@ -199,7 +199,8 @@ https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js
                 const ctx2 = document.getElementById('myChart2');
                 const topFiveProducts = [];
                 const topFiveQuantities = [];
-                for (let i = 0; i < 5; i++) {
+                let numTopProducts = (res.data.results.length > 5) ? 5 : res.data.results.length;
+                for (let i = 0; i < numTopProducts; i++) {
                     // console.log(res.data.results[i].product_name);
                     topFiveProducts.push(res.data.results[i].product_name);
                     topFiveQuantities.push(res.data.results[i].total_quantity);
@@ -210,12 +211,23 @@ https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js
                     labels: topFiveProducts,
                     datasets: [{
                         data: topFiveQuantities,
+                        hoverBackgroundColor:[
+                          'rgba(255, 99, 132, 0.9)',
+                          'rgba(255, 159, 64, 0.9)',
+                          'rgba(255, 205, 86, 0.9)',
+                          'rgba(75, 192, 192, 0.9)',
+                          'rgba(54, 162, 235, 0.9)',
+                          'rgba(153, 102, 255, 0.9)',
+                          'rgba(201, 203, 207, 0.9)'
+                        ],
                         backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(75, 192, 192)',
-                            'rgb(255, 205, 86)',
-                            'rgb(0,130,130)',
-                            'rgb(0,130,10)'
+                          'rgba(255, 99, 132, 0.5)',
+                          'rgba(255, 159, 64, 0.5)',
+                          'rgba(255, 205, 86, 0.5)',
+                          'rgba(75, 192, 192, 0.5)',
+                          'rgba(54, 162, 235, 0.5)',
+                          'rgba(153, 102, 255, 0.5)',
+                          'rgba(201, 203, 207, 0.5)'
                         ],
                         hoverOffset: 0
                     }]
