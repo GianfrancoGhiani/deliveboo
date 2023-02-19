@@ -18,6 +18,11 @@
                 <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Orders
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Route::currentRouteName() == 'admin.stats' ? 'active-item' : '' }}" href="{{route('admin.stats')}}">
+                <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Stats
+            </a>
+        </li>
 
     </ul>
 </nav>
