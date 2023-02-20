@@ -12,7 +12,7 @@
         <div class="row row-cols-1">
             <div class="col row">
                 {{-- <input class="col"  type="month" name="filter" id="filter" value="{{date('Y-m')}}"> --}}
-                <input class="col-auto" style="font-size: 1.4rem"  type="week" name="filter" id="week" value="{{date('Y').'-W'.date('W')}}">
+                <input class="col-auto" style="font-size: 1.05rem"  type="week" name="filter" id="week" value="{{date('Y').'-W'.date('W')}}">
             </div>
             <div class="col row align-items-center">
                 <div class="col-6">
