@@ -227,7 +227,8 @@ class ProductController extends Controller
             if ($tempProd) {
 
                 //cancella con una softdelete
-                $tempProd->delete();
+                $tempProd->forceDelete();
+
 
                 return redirect()->action([ProductController::class, 'index'])->with('message', "$tempProd->name deleted");
             } else {
