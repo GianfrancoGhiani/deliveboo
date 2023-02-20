@@ -155,6 +155,9 @@ $fa-font-path: "./webfonts" !default;
 
 //Style Dashboard
 #dashboard{
+    .dashboard{
+        height: calc(100vh - 3rem);
+    }
     .card-header{
         img{
             width: 350px;
