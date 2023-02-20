@@ -24,18 +24,6 @@
                     <p>Welcome <span class="text-capitalize">{{ Auth::user()->name }}, </span>you have successfully logged in, now you are ready to manage your "{{$restaurant->name}}"</p>
                 </div>
             <div>
-            <ul class="flex-column dashboard-list">
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'admin.products.index' ? '' : '' }}" href="{{route('admin.products.index')}}">
-                        <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Products
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'admin.orders.index' ? '' : '' }}" href="{{route('admin.orders.index')}}">
-                        <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Orders
-                    </a>
-                </li>
-            </ul>
             </div>
         </div>
     </div>

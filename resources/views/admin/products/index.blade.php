@@ -38,7 +38,7 @@
                             {{-- prodotto --}}
                             <td style="width: 25rem"><a href="{{route('admin.products.show', $product->slug)}}" class="text-white text-decoration-none" title="View Product">{{$product->name}}</a></td>
                             {{-- ingredienti --}}
-                            <td style="width: 50rem">{{$product->ingredients}}</td>
+                            <td style="width: 50rem" class="text-capitalize">{{$product->ingredients}}</td>
                             {{-- preview --}}
                             <td style="width: 5rem"><img src="{{asset('storage/' . $product->image_url)}}" alt="" class="w-100"></td>
                             

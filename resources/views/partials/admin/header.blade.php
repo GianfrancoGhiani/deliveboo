@@ -4,7 +4,7 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown me-3">
                 <a class="dropdown-toggle text-capitalize d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    <i class="fa-brands fa-github me-2"></i>
+                    <i class="fa-solid fa-user me-2"></i>
                 <div>{{ Auth::user()->name }}</div>
                 </a>
 
