@@ -12,10 +12,10 @@
     <form action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data" class="p-4">
         @csrf
 
-        <div class="row bg-dark-light">
+        <div class="row bg-dark-light py-3">
             <h1>Create a new Resturant</h1>
 
-            <div class="col-12">
+            <div class="col-12 col-lg-6">
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-                <div class="col-12">
+                <div class="col-12 col-lg-6">
 
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12 col-lg-6">
 
                     <div class="mb-3">
                         <label for="piva" class="form-label">Vat Number</label>
@@ -59,38 +59,7 @@
                         @enderror
                     </div>
                 </div>
-
-                <div class="col-12">
-
-                    <div class="mb-3">
-                        <label for="opening_time" class="form-label">Opening</label>
-                        <div class="d-flex gap-2">
-                            <input type="time" class="form-control @error('opening_time') is-invalid @enderror" id="opening_time"
-                                name="opening_time">
-
-                        </div>
-                        @error('opening_time')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="col-12">
-
-                    <div class="mb-3">
-                        <label for="closing_time" class="form-label">Closing</label>
-                        <div class="d-flex gap-2">
-                            <input type="time" class="form-control @error('closing_time') is-invalid @enderror" id="closing_time"
-                                name="closing_time">
-
-                        </div>
-                        @error('closing_time')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="col-12">
+                <div class="col-12 col-lg-6">
 
                     <div class="mb-3">
                         <label for="tel_num" class="form-label">Phone Number</label>
@@ -105,25 +74,60 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <img id="uploadPreview" width="100" src="https://via.placeholder.com/300x200">
-                    <label for="image_url" class="form-label">Image</label>
-                    <input type="file" name="image_url" id="input_file_img" class="form-control mt-3 @error('image_url') is-invalid @enderror">
+                <div class="col-12 col-lg-6">
 
-                    @error('image_url')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <div class="mb-3">
+                        <label for="opening_time" class="form-label">Opening</label>
+                        <div class="d-flex gap-2">
+                            <input type="time" class="form-control @error('opening_time') is-invalid @enderror" id="opening_time"
+                                name="opening_time">
+
+                        </div>
+                        @error('opening_time')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12 col-lg-6">
+
+                    <div class="mb-3">
+                        <label for="closing_time" class="form-label">Closing</label>
+                        <div class="d-flex gap-2">
+                            <input type="time" class="form-control @error('closing_time') is-invalid @enderror" id="closing_time"
+                                name="closing_time">
+
+                        </div>
+                        @error('closing_time')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                
+
+                <div class="mb-3 d-flex col-12 col-lg-6">
+                    <div class="w-50 d-flex">
+                        <img id="uploadPreview" width="250" src="https://via.placeholder.com/300x200">
+                        <label for="image_url" class="form-label align-self-end ps-1">Image</label>
+                    </div>
+                    <div class="w-50 align-self-end">
+                        <input type="file" name="image_url" id="input_file_img" class="form-control mt-3 @error('image_url') is-invalid @enderror">
+                        @error('image_url')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-12 ">
 
                     <div class="mb-3">
                         <label class="form-label">Type</label>
                         <div class="d-flex gap-2">
                             @foreach ($types as $type)
-                                <label for="types{{$type->id}}" class="form-check-label">{{$type->name}}</label>
-                                <input type="checkbox" class="form-check-input @error('types') is-invalid @enderror" id="types{{$type->id}}"
-                                    name="types[]" value="{{$type->id}}">
+                            <input type="checkbox" class="form-check-input @error('types') is-invalid @enderror" id="types{{$type->id}}"
+                            name="types[]" value="{{$type->id}}">
+                            <label for="types{{$type->id}}" class="form-check-label text-capitalize">{{$type->name}}</label>
                             @endforeach
                            
                         </div>
